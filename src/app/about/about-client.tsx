@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import Navbar from "@/components/sections/navbar";
+import OverlayMenu from "@/components/sections/overlay-menu";
 import Footer from "@/components/sections/footer";
 import Team from "@/components/sections/team";
 import Image from "next/image";
@@ -67,6 +68,7 @@ const values = [
 ];
 
 export default function AboutClient() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const missionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: missionProgress } = useScroll({
     target: missionRef,
@@ -76,8 +78,9 @@ export default function AboutClient() {
   const missionOpacity = useTransform(missionProgress, [0, 0.2, 0.75, 1], [0, 1, 1, 0]);
 
   return (
-    <main className="bg-[#f0ebe3] text-[#111] selection:bg-amber-400 selection:text-[#111]">
-      <Navbar onMenuToggle={() => {}} />
+    <main className="bg-[#f0ebe3] text-[#111] selection:bg-[#D1000A] selection:text-white">
+      <Navbar onMenuToggle={() => setMenuOpen(true)} />
+      <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
       {/* HERO */}
       <section className="min-h-[100vh] flex items-end px-[5vw] pt-40 pb-24">

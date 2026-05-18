@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from 'react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { X } from 'lucide-react';
 
 interface ContactModalProps {

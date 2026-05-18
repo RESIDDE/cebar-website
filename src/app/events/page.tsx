@@ -1,5 +1,5 @@
 import React from "react";
-import EventsClient from "./events-client";
+import EventsClient from "@/app/events/events-client";
 
 export const metadata = {
   title: "Events | CEBAR Group",

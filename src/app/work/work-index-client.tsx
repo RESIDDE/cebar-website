@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { ProjectData } from "@/lib/project-data";
 import Navbar from "@/components/sections/navbar";
+import OverlayMenu from "@/components/sections/overlay-menu";
 import Footer from "@/components/sections/footer";
 
 const categories = ["All", "Education", "Corporate", "Government"];
@@ -60,9 +61,12 @@ export default function WorkIndexClient({ projects }: { projects: ProjectData[] 
     restDelta: 0.001
   });
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <main ref={containerRef} className="bg-[#111] text-[#f0ebe3] min-h-screen selection:bg-[#D1000A] selection:text-white">
-      <Navbar onMenuToggle={() => {}} />
+      <Navbar onMenuToggle={() => setMenuOpen(true)} />
+      <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
       {/* Progress Bar */}
       <motion.div 

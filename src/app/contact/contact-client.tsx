@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Navbar from "@/components/sections/navbar";
+import OverlayMenu from "@/components/sections/overlay-menu";
 import Footer from "@/components/sections/footer";
 import { FiArrowUpRight } from "react-icons/fi";
 
@@ -23,6 +24,7 @@ const FadeUp = ({ children, delay = 0 }: { children: React.ReactNode, delay?: nu
 
 export default function ContactClient() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +34,8 @@ export default function ContactClient() {
 
   return (
     <main className="bg-[#111] text-[#f0ebe3] min-h-screen selection:bg-[#D1000A] selection:text-white">
-      <Navbar onMenuToggle={() => {}} />
+      <Navbar onMenuToggle={() => setMenuOpen(true)} />
+      <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
       {/* --- HERO SECTION --- */}
       <section className="pt-[25vh] pb-[10vh] px-[5vw]">

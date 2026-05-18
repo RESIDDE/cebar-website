@@ -63,6 +63,20 @@ const TextSlide = ({ caption, progress, index, total }: { caption: any, progress
   );
 };
 
+const ProgressBarItem = ({ scrollYProgress, index, total }: { scrollYProgress: any, index: number, total: number }) => {
+  const opacity = useTransform(
+    scrollYProgress, 
+    [index / total, (index + 0.5) / total, (index + 1) / total], 
+    [0.2, 1, 0.2]
+  );
+  return (
+    <motion.div 
+      style={{ opacity }}
+      className="w-1 h-8 bg-white/40 rounded-full"
+    />
+  );
+};
+
 const WhoWeAre = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -114,20 +128,14 @@ const WhoWeAre = () => {
         {/* Progress Indicator Side Text */}
         <div className="absolute right-[5vw] top-1/2 -translate-y-1/2 flex flex-col items-end gap-2 text-[10px] tracking-[0.4em] text-white/30 uppercase vertical-text">
           <span className="mb-4">Who We Are</span>
-          {captions.map((_, i) => {
-            const opacity = useTransform(
-              scrollYProgress, 
-              [i / captions.length, (i + 0.5) / captions.length, (i + 1) / captions.length], 
-              [0.2, 1, 0.2]
-            );
-            return (
-              <motion.div 
-                key={i} 
-                style={{ opacity }}
-                className="w-1 h-8 bg-white/40 rounded-full"
-              />
-            );
-          })}
+          {captions.map((_, i) => (
+            <ProgressBarItem 
+              key={i}
+              scrollYProgress={scrollYProgress}
+              index={i}
+              total={captions.length}
+            />
+          ))}
         </div>
       </div>
     </section>
