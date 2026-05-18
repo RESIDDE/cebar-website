@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 interface NavbarProps {
   onMenuToggle?: () => void;
@@ -52,11 +53,11 @@ const Navbar = ({ onMenuToggle }: NavbarProps) => {
         }`}
       >
         {/* Logo Container */}
-        <motion.a 
-          layout
-          href="/" 
-          aria-label="CEBAR Group Home"
-          className={`pointer-events-auto relative flex items-center justify-center overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        <Link href="/" passHref legacyBehavior>
+          <motion.a 
+            layout
+            aria-label="CEBAR Group Home"
+            className={`pointer-events-auto relative flex items-center justify-center overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             isScrolled 
               ? 'h-[46px] px-5 md:px-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20' 
               : 'h-[53px] px-4 md:px-8 bg-transparent'
@@ -88,7 +89,8 @@ const Navbar = ({ onMenuToggle }: NavbarProps) => {
               </motion.span>
             )}
           </AnimatePresence>
-        </motion.a>
+          </motion.a>
+        </Link>
 
         {/* Navigation Links Container */}
         <AnimatePresence>
@@ -103,7 +105,7 @@ const Navbar = ({ onMenuToggle }: NavbarProps) => {
             >
               <div className="flex gap-10">
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.name}
                     href={link.href}
                     className="group relative overflow-hidden h-6 flex flex-col justify-start"
@@ -117,7 +119,7 @@ const Navbar = ({ onMenuToggle }: NavbarProps) => {
                         {link.name}
                       </span>
                     </div>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </motion.div>

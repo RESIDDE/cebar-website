@@ -3,6 +3,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 interface OverlayMenuProps {
   isOpen: boolean;
@@ -72,7 +73,7 @@ const OverlayMenu = ({ isOpen, onClose }: OverlayMenuProps) => {
                   }}
                   className="border-t border-white/5 last:border-b"
                 >
-                  <a
+                  <Link
                     href={item.href}
                     onClick={onClose}
                     className="group flex items-center justify-between py-7 md:py-8"
@@ -86,7 +87,7 @@ const OverlayMenu = ({ isOpen, onClose }: OverlayMenuProps) => {
                       </h2>
                     </div>
                     <ArrowUpRight className="w-8 h-8 text-white/20 group-hover:text-white group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500" />
-                  </a>
+                  </Link>
                 </motion.div>
               ))}
             </nav>

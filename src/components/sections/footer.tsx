@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 const footerLinks = {
   Services: [
@@ -109,21 +110,25 @@ const Footer = () => {
                 {category}
               </span>
               <ul className="flex flex-col gap-3">
-                {links.map((link: any) => (
-                  <li key={link.name}>
-                    <a 
-                      href={link.href}
-                      target={link.external ? "_blank" : undefined}
-                      rel={link.external ? "noreferrer noopener" : undefined}
-                      className="group text-white/40 text-sm font-light hover:text-white transition-colors duration-300 flex items-center gap-1.5"
-                    >
-                      {link.name}
-                      {link.external && (
-                        <ArrowUpRight className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                      )}
-                    </a>
-                  </li>
-                ))}
+                {links.map((link: any) => {
+                  const isExternal = link.external;
+                  const LinkComponent = isExternal ? "a" : Link;
+                  return (
+                    <li key={link.name}>
+                      <LinkComponent 
+                        href={link.href}
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noreferrer noopener" : undefined}
+                        className="group text-white/40 text-sm font-light hover:text-white transition-colors duration-300 flex items-center gap-1.5"
+                      >
+                        {link.name}
+                        {isExternal && (
+                          <ArrowUpRight className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                        )}
+                      </LinkComponent>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
@@ -135,12 +140,12 @@ const Footer = () => {
             © {new Date().getFullYear()} CEBAR Training and Consultancy Services Limited. All rights reserved.
           </span>
           <div className="flex items-center gap-8">
-            <a href="/privacy" className="text-white/20 text-[0.7rem] hover:text-white/60 transition-colors uppercase tracking-wider">
+            <Link href="/privacy" className="text-white/20 text-[0.7rem] hover:text-white/60 transition-colors uppercase tracking-wider">
               Privacy Policy
-            </a>
-            <a href="/terms" className="text-white/20 text-[0.7rem] hover:text-white/60 transition-colors uppercase tracking-wider">
+            </Link>
+            <Link href="/terms" className="text-white/20 text-[0.7rem] hover:text-white/60 transition-colors uppercase tracking-wider">
               Terms of Use
-            </a>
+            </Link>
           </div>
         </div>
       </div>
