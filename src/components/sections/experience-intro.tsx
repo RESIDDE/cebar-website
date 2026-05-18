@@ -153,7 +153,7 @@ const ExperienceIntro = () => {
         </motion.div>
 
         {/* Persistent dark overlay */}
-        <div className="absolute inset-0 bg-[#020202]/80 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-[#020202]/70" />
 
         {/* Animated Phases */}
         <PhaseOne scrollYProgress={springScrollProgress} />

@@ -14,7 +14,8 @@ const navItems = [
   { label: "Services", href: "/services", index: "02" },
   { label: "Our Team", href: "/our-team", index: "03" },
   { label: "Events", href: "/events", index: "04" },
-  { label: "Contact", href: "/contact", index: "05" },
+  { label: "Blog", href: "/blog", index: "05" },
+  { label: "Contact", href: "/contact", index: "06" },
 ];
 
 const OverlayMenu = ({ isOpen, onClose }: OverlayMenuProps) => {

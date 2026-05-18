@@ -16,6 +16,7 @@ const footerLinks = {
     { name: "About Us", href: "/about" },
     { name: "Our Team", href: "/our-team" },
     { name: "Our Events", href: "/events" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ],
   Connect: [
