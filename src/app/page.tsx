@@ -5,6 +5,7 @@ import Navbar from "@/components/sections/navbar";
 import Hero from "@/components/sections/hero";
 import ExperienceIntro from "@/components/sections/experience-intro";
 import WhoWeAre from "@/components/sections/who-we-are";
+import SponsorAnnouncement from "@/components/sections/sponsor-announcement";
 import Services from "@/components/sections/services";
 import UpcomingEvents from "@/components/sections/upcoming-events";
 import Partners from "@/components/sections/partners";
@@ -25,6 +26,7 @@ export default function Home() {
         <Hero />
         <ExperienceIntro />
         <WhoWeAre />
+        <SponsorAnnouncement />
         <Services />
         <UpcomingEvents />
         <Partners />

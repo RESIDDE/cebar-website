@@ -70,8 +70,7 @@ const cebarEvents: EventItem[] = [
 
 export default function UpcomingEvents() {
   const [expandedId, setExpandedId] = useState<string | null>("aec-2026");
-  const [hoveredEvent, setHoveredEvent] = useState<EventItem | null>(null);
-  
+
   // Countdown Timer state for the 2026 event
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -103,21 +102,7 @@ export default function UpcomingEvents() {
     return () => clearInterval(interval);
   }, []);
 
-  // Floating Image Mouse Tracking
-  const containerRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
-  const floatX = useSpring(mouseX, springConfig);
-  const floatY = useSpring(mouseY, springConfig);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left - 120); // Center the float
-    mouseY.set(e.clientY - rect.top - 120);
-  };
 
   const toggleExpand = (id: string) => {
     setExpandedId(expandedId === id ? null : id);
@@ -125,8 +110,6 @@ export default function UpcomingEvents() {
 
   return (
     <section
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
       className="relative py-24 bg-[#050505] text-[#ffffff] overflow-hidden border-t border-white/10"
       id="upcoming-events"
       data-theme="dark"
@@ -134,42 +117,6 @@ export default function UpcomingEvents() {
       {/* Background radial accent glow */}
       <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-[#D1000A]/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[450px] h-[450px] bg-[#D1000A]/3 blur-[140px] rounded-full pointer-events-none" />
-
-      {/* Floating Cursor Image Preview */}
-      <AnimatePresence>
-        {hoveredEvent && (
-          <motion.div
-            style={{
-              x: floatX,
-              y: floatY,
-              position: "absolute",
-              pointerEvents: "none",
-              zIndex: 50,
-            }}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 0.95, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="w-[280px] h-[190px] rounded-xl overflow-hidden border border-white/20 bg-black/40 backdrop-blur-md p-1 shadow-2xl hidden lg:block"
-          >
-            <div className="relative w-full h-full rounded-lg overflow-hidden">
-              <img
-                src={hoveredEvent.image}
-                alt={hoveredEvent.title}
-                className="w-full h-full object-cover filter brightness-[0.85] contrast-[1.1]"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3">
-                <p className="text-[10px] font-mono text-[#D1000A] uppercase tracking-wider font-semibold">
-                  {hoveredEvent.status} EVENT
-                </p>
-                <p className="text-xs text-white font-medium truncate">
-                  {hoveredEvent.theme}
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <div className="container relative z-10">
         
@@ -247,8 +194,7 @@ export default function UpcomingEvents() {
             return (
               <div
                 key={evt.id}
-                onMouseEnter={() => setHoveredEvent(evt)}
-                onMouseLeave={() => setHoveredEvent(null)}
+                key={evt.id}
                 className={`relative border-b last:border-b-0 border-white/10 transition-colors duration-500 ${
                   isExpanded ? "bg-white/[0.02]" : "hover:bg-white/[0.01]"
                 }`}
@@ -324,8 +270,18 @@ export default function UpcomingEvents() {
                       className="overflow-hidden"
                     >
                       <div className="px-4 md:px-8 pb-8 pt-2 grid grid-cols-1 lg:grid-cols-12 gap-8 border-t border-white/5 bg-black/10">
+                        {/* Event Image */}
+                        <div className="lg:col-span-3 relative rounded-xl overflow-hidden min-h-[200px] hidden md:block">
+                          <img
+                            src={evt.image}
+                            alt={evt.title}
+                            className="absolute inset-0 w-full h-full object-cover filter brightness-[0.85] contrast-[1.1]"
+                          />
+                          <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+                        </div>
+
                         {/* Left description column */}
-                        <div className="lg:col-span-6 flex flex-col justify-between">
+                        <div className="lg:col-span-5 flex flex-col justify-between">
                           <div>
                             <h4 className="text-xs font-mono uppercase tracking-widest text-white/30 mb-3">
                               ABOUT THE SYMPOSIUM
@@ -359,7 +315,7 @@ export default function UpcomingEvents() {
                         </div>
 
                         {/* Right schedule column */}
-                        <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white/[0.01] border border-white/5 p-6 rounded-xl">
+                        <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white/[0.01] border border-white/5 p-6 rounded-xl">
                           <div className="flex gap-4">
                             <Calendar className="w-5 h-5 text-[#D1000A] shrink-0" />
                             <div>
