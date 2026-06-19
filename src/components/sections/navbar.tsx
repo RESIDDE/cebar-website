@@ -53,10 +53,9 @@ const Navbar = ({ onMenuToggle }: NavbarProps) => {
         }`}
       >
         {/* Logo Container */}
-        <Link href="/" passHref legacyBehavior>
-          <motion.a 
+        <Link href="/" aria-label="CEBAR Group Home">
+          <motion.div 
             layout
-            aria-label="CEBAR Group Home"
             className={`pointer-events-auto relative flex items-center justify-center overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             isScrolled 
               ? 'h-[46px] px-5 md:px-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20' 
@@ -89,7 +88,7 @@ const Navbar = ({ onMenuToggle }: NavbarProps) => {
               </motion.span>
             )}
           </AnimatePresence>
-          </motion.a>
+          </motion.div>
         </Link>
 
         {/* Navigation Links Container */}

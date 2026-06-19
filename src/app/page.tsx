@@ -27,8 +27,8 @@ export default function Home() {
         <ExperienceIntro />
         <WhoWeAre />
         <SponsorAnnouncement />
-        <Services />
         <UpcomingEvents />
+        <Services />
         <Partners />
         <TeamSection />
         <FAQSection />
