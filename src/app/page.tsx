@@ -6,6 +6,8 @@ import Hero from "@/components/sections/hero";
 import ExperienceIntro from "@/components/sections/experience-intro";
 import WhoWeAre from "@/components/sections/who-we-are";
 import SponsorAnnouncement from "@/components/sections/sponsor-announcement";
+import Sponsors from "@/components/sections/sponsors";
+import EventInterview from "@/components/sections/event-interview";
 import Services from "@/components/sections/services";
 import UpcomingEvents from "@/components/sections/upcoming-events";
 import Partners from "@/components/sections/partners";
@@ -27,6 +29,8 @@ export default function Home() {
         <ExperienceIntro />
         <WhoWeAre />
         <SponsorAnnouncement />
+        <Sponsors />
+        <EventInterview />
         <UpcomingEvents />
         <Services />
         <Partners />
