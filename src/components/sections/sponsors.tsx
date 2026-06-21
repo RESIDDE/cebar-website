@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function Sponsors() {
   return (
-    <section className="py-24 bg-white border-t border-black/5 relative overflow-hidden" data-theme="light">
+    <section className="py-24 bg-white border-t border-black/5 relative overflow-x-hidden" data-theme="light">
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-center space-y-12">
           

@@ -110,7 +110,7 @@ export default function UpcomingEvents() {
 
   return (
     <section
-      className="relative py-24 bg-[#050505] text-[#ffffff] overflow-hidden border-t border-white/10"
+      className="relative py-24 bg-[#050505] text-[#ffffff] overflow-x-hidden border-t border-white/10"
       id="upcoming-events"
       data-theme="dark"
     >

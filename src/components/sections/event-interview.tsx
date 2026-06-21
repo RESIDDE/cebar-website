@@ -6,7 +6,7 @@ import { PlayCircle } from "lucide-react";
 
 export default function EventInterview() {
   return (
-    <section className="relative py-24 bg-[#0a0a0a] text-white overflow-hidden border-t border-white/10" data-theme="dark">
+    <section className="relative py-24 bg-[#0a0a0a] text-white overflow-x-hidden border-t border-white/10" data-theme="dark">
       {/* Decorative background elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none translate-y-1/2 -translate-x-1/3" />

@@ -6,7 +6,7 @@ import { Sparkles } from "lucide-react";
 
 export default function SponsorAnnouncement() {
   return (
-    <section className="relative py-24 bg-white text-[#111111] overflow-hidden" data-theme="light">
+    <section className="relative py-24 bg-white text-[#111111] overflow-x-hidden" data-theme="light">
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-center text-center space-y-8">
           <motion.div 
