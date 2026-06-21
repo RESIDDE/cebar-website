@@ -56,7 +56,7 @@ export default function EventInterview() {
               <video 
                 className="absolute inset-0 w-full h-full object-cover"
                 controls
-                preload="metadata"
+                preload="none"
                 poster="/ait interview.jpeg"
               >
                 <source src="/weekly%20politics%20interview%20(3).mp4" type="video/mp4" />
