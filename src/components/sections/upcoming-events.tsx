@@ -110,9 +110,8 @@ export default function UpcomingEvents() {
 
   return (
     <section
-      className="relative py-24 bg-[#050505] text-[#ffffff] overflow-x-hidden border-t border-white/10"
+      className="relative py-24 bg-background text-foreground overflow-x-hidden border-t border-border"
       id="upcoming-events"
-      data-theme="dark"
     >
       {/* Background radial accent glow */}
       <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-[#D1000A]/5 blur-[120px] rounded-full pointer-events-none" />
@@ -131,13 +130,13 @@ export default function UpcomingEvents() {
               </span>
             </div>
             
-            <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-semibold tracking-tight leading-[1] text-transparent bg-clip-text bg-linear-to-b from-white to-white/70">
+            <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-semibold tracking-tight leading-[1] text-foreground">
               Abuja Educators <br />
-              <span className="italic font-light text-[#D1000A]">Conference 2026</span>
+              <span className="italic font-light text-accent">Conference 2026</span>
             </h2>
             
-            <p className="mt-6 text-white/60 max-w-lg leading-relaxed text-sm md:text-base">
-              A premier high-impact gathering centered on <span className="text-white font-semibold">Entrepreneurship in Education</span>, featuring exclusive masterclasses, policy framework audits, and networking opportunities at The Rock Event Centre.
+            <p className="mt-6 text-muted-foreground max-w-lg leading-relaxed text-sm md:text-base">
+              A premier high-impact gathering centered on <span className="text-foreground font-semibold">Entrepreneurship in Education</span>, featuring exclusive masterclasses, policy framework audits, and networking opportunities at The Rock Event Centre.
             </p>
           </div>
 
@@ -152,22 +151,22 @@ export default function UpcomingEvents() {
               {!timeLeft.isOver ? (
                 <div className="grid grid-cols-4 gap-4 text-center">
                   <div>
-                    <div className="text-3xl md:text-4xl font-semibold tracking-tighter text-white">
+                    <div className="text-3xl md:text-4xl font-semibold tracking-tighter text-foreground">
                       {String(timeLeft.days).padStart(2, "0")}
                     </div>
-                    <div className="text-[10px] font-mono uppercase text-white/40 mt-1">Days</div>
+                    <div className="text-[10px] font-mono uppercase text-muted-foreground mt-1">Days</div>
                   </div>
                   <div>
-                    <div className="text-3xl md:text-4xl font-semibold tracking-tighter text-white">
+                    <div className="text-3xl md:text-4xl font-semibold tracking-tighter text-foreground">
                       {String(timeLeft.hours).padStart(2, "0")}
                     </div>
-                    <div className="text-[10px] font-mono uppercase text-white/40 mt-1">Hours</div>
+                    <div className="text-[10px] font-mono uppercase text-muted-foreground mt-1">Hours</div>
                   </div>
                   <div>
-                    <div className="text-3xl md:text-4xl font-semibold tracking-tighter text-white">
+                    <div className="text-3xl md:text-4xl font-semibold tracking-tighter text-foreground">
                       {String(timeLeft.minutes).padStart(2, "0")}
                     </div>
-                    <div className="text-[10px] font-mono uppercase text-white/40 mt-1">Mins</div>
+                    <div className="text-[10px] font-mono uppercase text-muted-foreground mt-1">Mins</div>
                   </div>
                   <div>
                     <div className="text-3xl md:text-4xl font-semibold tracking-tighter text-[#D1000A]">
@@ -186,7 +185,7 @@ export default function UpcomingEvents() {
         </div>
 
         {/* Interactive Event Showcase List */}
-        <div className="border-y border-white/10">
+        <div className="border-y border-border">
           {cebarEvents.map((evt) => {
             const isExpanded = expandedId === evt.id;
             const isUpcoming = evt.status === "UPCOMING";
@@ -194,9 +193,8 @@ export default function UpcomingEvents() {
             return (
               <div
                 key={evt.id}
-                key={evt.id}
-                className={`relative border-b last:border-b-0 border-white/10 transition-colors duration-500 ${
-                  isExpanded ? "bg-white/[0.02]" : "hover:bg-white/[0.01]"
+                className={`relative border-b last:border-b-0 border-border transition-colors duration-500 ${
+                  isExpanded ? "bg-muted/30" : "hover:bg-muted/10"
                 }`}
               >
                 {/* Row Summary Header */}
@@ -212,17 +210,17 @@ export default function UpcomingEvents() {
 
                     {/* Date Badge */}
                     <div className="hidden sm:flex flex-col items-start w-[120px]">
-                      <span className="text-xs font-mono tracking-widest text-white/50 group-hover:text-white transition-colors duration-300">
+                      <span className="text-xs font-mono tracking-widest text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                         {evt.dateStr.toUpperCase()}
                       </span>
                     </div>
 
                     {/* Title & Theme */}
                     <div className="flex flex-col">
-                      <h3 className="text-lg md:text-2xl font-medium tracking-tight group-hover:text-[#D1000A] transition-colors duration-300">
+                      <h3 className="text-lg md:text-2xl font-medium tracking-tight group-hover:text-accent transition-colors duration-300">
                         {evt.title}
                       </h3>
-                      <span className="text-xs text-white/40 font-mono tracking-wide mt-1 uppercase">
+                      <span className="text-xs text-muted-foreground font-mono tracking-wide mt-1 uppercase">
                         {evt.theme}
                       </span>
                     </div>
@@ -237,12 +235,12 @@ export default function UpcomingEvents() {
                     <div className="flex items-center gap-3">
                       {/* Live Badge */}
                       {isUpcoming ? (
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-mono font-bold tracking-widest bg-[#D1000A]/10 text-[#D1000A] border border-[#D1000A]/20">
-                          <span className="h-1.5 w-1.5 bg-[#D1000A] rounded-full animate-pulse" />
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-mono font-bold tracking-widest bg-accent/10 text-accent border border-accent/20">
+                          <span className="h-1.5 w-1.5 bg-accent rounded-full animate-pulse" />
                           UPCOMING
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-mono tracking-widest bg-white/5 text-white/40 border border-white/10">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-mono tracking-widest bg-muted text-muted-foreground border border-border">
                           COMPLETED
                         </span>
                       )}
@@ -251,7 +249,7 @@ export default function UpcomingEvents() {
                       <motion.div
                         animate={{ rotate: isExpanded ? 90 : 0 }}
                         transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="p-1 text-white/30 group-hover:text-white"
+                        className="p-1 text-muted-foreground group-hover:text-foreground"
                       >
                         <ChevronRight className="w-5 h-5" />
                       </motion.div>
@@ -269,7 +267,7 @@ export default function UpcomingEvents() {
                       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="px-4 md:px-8 pb-8 pt-2 grid grid-cols-1 lg:grid-cols-12 gap-8 border-t border-white/5 bg-black/10">
+                      <div className="px-4 md:px-8 pb-8 pt-2 grid grid-cols-1 lg:grid-cols-12 gap-8 border-t border-border bg-muted/20">
                         {/* Event Image */}
                         <div className="lg:col-span-3 relative rounded-xl overflow-hidden min-h-[200px] hidden md:block">
                           <img
@@ -283,10 +281,10 @@ export default function UpcomingEvents() {
                         {/* Left description column */}
                         <div className="lg:col-span-5 flex flex-col justify-between">
                           <div>
-                            <h4 className="text-xs font-mono uppercase tracking-widest text-white/30 mb-3">
+                            <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-3">
                               ABOUT THE SYMPOSIUM
                             </h4>
-                            <p className="text-white/70 text-sm md:text-base leading-relaxed">
+                            <p className="text-foreground/80 text-sm md:text-base leading-relaxed">
                               {evt.description}
                             </p>
                           </div>
@@ -297,7 +295,7 @@ export default function UpcomingEvents() {
                                 href={evt.registerUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 bg-[#D1000A] hover:bg-[#b00008] text-white px-5 py-2.5 text-xs font-mono uppercase tracking-wider font-bold transition-all duration-300 hover:gap-3"
+                                className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-accent-foreground px-5 py-2.5 text-xs font-mono uppercase tracking-wider font-bold transition-all duration-300 hover:gap-3"
                               >
                                 REGISTER TO ATTEND
                                 <ArrowUpRight className="w-4 h-4" />
@@ -305,7 +303,7 @@ export default function UpcomingEvents() {
                             ) : (
                               <a
                                 href={evt.registerUrl}
-                                className="inline-flex items-center gap-2 border border-white/20 hover:border-white text-white px-5 py-2.5 text-xs font-mono uppercase tracking-wider transition-all duration-300 hover:gap-3"
+                                className="inline-flex items-center gap-2 border border-border hover:border-foreground text-foreground px-5 py-2.5 text-xs font-mono uppercase tracking-wider transition-all duration-300 hover:gap-3"
                               >
                                 VIEW EVENT ARCHIVE
                                 <ArrowUpRight className="w-4 h-4" />
@@ -315,50 +313,50 @@ export default function UpcomingEvents() {
                         </div>
 
                         {/* Right schedule column */}
-                        <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white/[0.01] border border-white/5 p-6 rounded-xl">
+                        <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 gap-6 bg-background border border-border p-6 rounded-xl">
                           <div className="flex gap-4">
-                            <Calendar className="w-5 h-5 text-[#D1000A] shrink-0" />
+                            <Calendar className="w-5 h-5 text-accent shrink-0" />
                             <div>
-                              <h5 className="text-[10px] font-mono uppercase text-white/40 tracking-wider">
+                              <h5 className="text-[10px] font-mono uppercase text-muted-foreground tracking-wider">
                                 DATE
                               </h5>
-                              <p className="text-sm font-medium mt-1 text-white">
+                              <p className="text-sm font-medium mt-1 text-foreground">
                                 {evt.dateStr}
                               </p>
                             </div>
                           </div>
 
                           <div className="flex gap-4">
-                            <Clock className="w-5 h-5 text-[#D1000A] shrink-0" />
+                            <Clock className="w-5 h-5 text-accent shrink-0" />
                             <div>
-                              <h5 className="text-[10px] font-mono uppercase text-white/40 tracking-wider">
+                              <h5 className="text-[10px] font-mono uppercase text-muted-foreground tracking-wider">
                                 TIME
                               </h5>
-                              <p className="text-sm font-medium mt-1 text-white">
+                              <p className="text-sm font-medium mt-1 text-foreground">
                                 {evt.time}
                               </p>
                             </div>
                           </div>
 
                           <div className="flex gap-4 sm:col-span-2">
-                            <MapPin className="w-5 h-5 text-[#D1000A] shrink-0" />
+                            <MapPin className="w-5 h-5 text-accent shrink-0" />
                             <div>
-                              <h5 className="text-[10px] font-mono uppercase text-white/40 tracking-wider">
+                              <h5 className="text-[10px] font-mono uppercase text-muted-foreground tracking-wider">
                                 LOCATION & VENUE
                               </h5>
-                              <p className="text-sm mt-1 text-white/80">
+                              <p className="text-sm mt-1 text-foreground/80">
                                 {evt.location}
                               </p>
                             </div>
                           </div>
 
-                          <div className="flex gap-4 sm:col-span-2 border-t border-white/5 pt-4">
+                          <div className="flex gap-4 sm:col-span-2 border-t border-border pt-4">
                             <div className="w-full flex justify-between items-center">
                               <div>
-                                <h5 className="text-[10px] font-mono uppercase text-white/40 tracking-wider">
+                                <h5 className="text-[10px] font-mono uppercase text-muted-foreground tracking-wider">
                                   TICKET PRICE
                                 </h5>
-                                <p className="text-sm font-semibold mt-1 text-white">
+                                <p className="text-sm font-semibold mt-1 text-foreground">
                                   {evt.ticketPrice}
                                 </p>
                               </div>

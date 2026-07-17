@@ -5,6 +5,7 @@ import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
 
 import SmoothScroll from "@/components/providers/smooth-scroll";
+import ThemeProvider from "@/components/providers/theme-provider";
 
 export const metadata: Metadata = {
   title: "CEBAR Group — Education & Corporate Training Consultancy",
@@ -20,13 +21,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
-        <ErrorReporter />
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
-        <VisualEditsMessenger />
+        <ThemeProvider>
+          <ErrorReporter />
+          <SmoothScroll>
+            {children}
+          </SmoothScroll>
+          <VisualEditsMessenger />
+        </ThemeProvider>
       </body>
     </html>
   );

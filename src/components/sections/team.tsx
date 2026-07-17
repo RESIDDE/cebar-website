@@ -91,7 +91,7 @@ const TeamSection = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative w-full bg-[#020202] text-white py-32 md:py-48 overflow-hidden selection:bg-[#D1000A] selection:text-white"
+      className="relative w-full bg-background text-foreground py-32 md:py-48 overflow-hidden selection:bg-accent selection:text-white"
     >
       <motion.div style={{ scale: sectionScale }} className="max-w-[1440px] mx-auto px-[5vw]">
         
@@ -102,7 +102,7 @@ const TeamSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-[10px] font-black tracking-[0.4em] uppercase text-white/30 mb-6 block"
+              className="text-[10px] font-black tracking-[0.4em] uppercase text-muted-foreground mb-6 block"
             >
               The Leadership
             </motion.span>
@@ -121,7 +121,7 @@ const TeamSection = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
-            className="max-w-md text-lg text-white/40 font-light leading-relaxed"
+            className="max-w-md text-lg text-muted-foreground font-light leading-relaxed"
           >
             A dedicated team of educators, HR specialists, and consultants united by a single purpose — transforming education and empowering organisations.
           </motion.p>
@@ -144,10 +144,10 @@ const TeamSection = () => {
                   >
                     <h3 className="text-3xl md:text-4xl lg:text-5xl font-medium uppercase tracking-tight mb-2 italic">{teamMembers[hoveredIndex].name}</h3>
                     <p className="text-[#D1000A] font-black tracking-[0.4em] uppercase text-[9px] mb-8">{teamMembers[hoveredIndex].role}</p>
-                    <p className="text-white/50 text-base leading-relaxed mb-10 font-light">{teamMembers[hoveredIndex].bio}</p>
+                    <p className="text-muted-foreground text-base leading-relaxed mb-10 font-light">{teamMembers[hoveredIndex].bio}</p>
                     <div className="flex justify-center gap-6 pointer-events-auto">
                       {teamMembers[hoveredIndex].socials.map(s => (
-                        <a key={s.name} href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#D1000A] hover:text-white transition-all duration-700 hover:scale-110">
+                        <a key={s.name} href="#" className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-[#D1000A] hover:text-white transition-all duration-700 hover:scale-110">
                           {s.icon}
                         </a>
                       ))}
@@ -163,9 +163,9 @@ const TeamSection = () => {
                         <motion.div 
                            animate={{ scale: [1, 1.1, 1], rotate: 360 }} 
                            transition={{ scale: { duration: 4, repeat: Infinity }, rotate: { duration: 20, repeat: Infinity, ease: "linear" } }}
-                           className="w-32 h-32 rounded-full border border-white/5 flex items-center justify-center"
+                           className="w-32 h-32 rounded-full border border-border flex items-center justify-center"
                         >
-                           <span className="text-[10px] font-black tracking-[0.5em] uppercase text-white/10">Hover</span>
+                           <span className="text-[10px] font-black tracking-[0.5em] uppercase text-muted-foreground/50">Hover</span>
                         </motion.div>
                      </div>
                    </motion.div>
@@ -178,7 +178,7 @@ const TeamSection = () => {
               
               {/* Spinning orbit ring */}
               <div 
-                className="absolute inset-0 rounded-full border border-white/5 pointer-events-none" 
+                className="absolute inset-0 rounded-full border border-border pointer-events-none" 
                 style={{ transform: `rotate(${rotation}deg)` }}
               />
 
@@ -207,11 +207,11 @@ const TeamSection = () => {
                     }}
                     transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
                   >
-                    <div className="relative w-full h-full rounded-full overflow-hidden border border-white/5 transition-all duration-700 group-hover:border-[#D1000A] group-hover:shadow-[0_0_60px_rgba(209,0,10,0.15)] bg-[#111]">
+                    <div className="relative w-full h-full rounded-full overflow-hidden border border-border transition-all duration-700 group-hover:border-[#D1000A] group-hover:shadow-[0_0_60px_rgba(209,0,10,0.15)] bg-card">
                       <img 
                         src={member.image} 
                         alt={member.name}
-                        className="w-full h-full object-cover grayscale transition-all duration-[1.5s] ease-out group-hover:grayscale-0 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-all duration-[1.5s] ease-out group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
@@ -221,9 +221,9 @@ const TeamSection = () => {
            </div>
 
            {/* Decorative Background Rings */}
-           <div className="absolute inset-[-5%] rounded-full border border-white/2 pointer-events-none" />
-           <div className="absolute inset-[10%] rounded-full border border-white/2 pointer-events-none" />
-           <div className="absolute inset-[20%] rounded-full border border-white/1 pointer-events-none" />
+           <div className="absolute inset-[-5%] rounded-full border border-border/20 pointer-events-none" />
+           <div className="absolute inset-[10%] rounded-full border border-border/20 pointer-events-none" />
+           <div className="absolute inset-[20%] rounded-full border border-border/10 pointer-events-none" />
         </div>
 
       </motion.div>

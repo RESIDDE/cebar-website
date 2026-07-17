@@ -45,15 +45,14 @@ const Partners = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#020202] text-white overflow-hidden py-[80px] md:py-[140px]"
-      data-theme="dark"
+      className="relative bg-background text-foreground overflow-hidden py-[80px] md:py-[140px]"
     >
       {/* Decorative horizontal marquee lines */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-5">
-        <motion.div style={{ x: xLeft }} className="absolute top-[25%] w-full flex gap-24 whitespace-nowrap text-[clamp(6rem,12vw,12rem)] font-bold uppercase tracking-tighter text-white/10">
+        <motion.div style={{ x: xLeft }} className="absolute top-[25%] w-full flex gap-24 whitespace-nowrap text-[clamp(6rem,12vw,12rem)] font-bold uppercase tracking-tighter text-foreground/20">
           IMPACT · IMPACT · IMPACT · IMPACT · IMPACT · IMPACT ·&nbsp;
         </motion.div>
-        <motion.div style={{ x: xRight }} className="absolute bottom-[20%] w-full flex gap-24 whitespace-nowrap text-[clamp(6rem,12vw,12rem)] font-bold uppercase tracking-tighter text-white/10">
+        <motion.div style={{ x: xRight }} className="absolute bottom-[20%] w-full flex gap-24 whitespace-nowrap text-[clamp(6rem,12vw,12rem)] font-bold uppercase tracking-tighter text-foreground/20">
           GROWTH · GROWTH · GROWTH · GROWTH · GROWTH · GROWTH ·&nbsp;
         </motion.div>
       </div>
@@ -77,7 +76,7 @@ const Partners = () => {
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               className="text-[clamp(2.5rem,7vw,6rem)] font-semibold leading-[0.9] tracking-tighter uppercase"
             >
-              Trusted across <br /><span className="italic text-white/40 font-light">all sectors.</span>
+              Trusted across <br /><span className="italic text-muted-foreground font-light">all sectors.</span>
             </motion.h2>
           </div>
           <motion.p
@@ -85,7 +84,7 @@ const Partners = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="max-w-sm text-white/40 text-base leading-relaxed font-light"
+            className="max-w-sm text-muted-foreground text-base leading-relaxed font-light"
           >
             From individual educators to government departments — CEBAR's cross-sector expertise creates transformative impact at every level.
           </motion.p>
@@ -97,18 +96,18 @@ const Partners = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-2 md:grid-cols-3 border-t border-white/5"
+          className="grid grid-cols-2 md:grid-cols-3 border-t border-border"
         >
           {sectors.map((s, i) => (
             <motion.div
               key={i}
               variants={itemVariants}
-              className="flex flex-col gap-2 py-10 md:py-14 px-6 border-b border-r border-white/5 last:border-r-0 even:md:border-r-0 md:[&:nth-child(3n)]:border-r-0"
+              className="flex flex-col gap-2 py-10 md:py-14 px-6 border-b border-r border-border last:border-r-0 even:md:border-r-0 md:[&:nth-child(3n)]:border-r-0"
             >
-              <span className="text-[clamp(2.5rem,5vw,4rem)] font-semibold tracking-tighter text-white leading-none">
+              <span className="text-[clamp(2.5rem,5vw,4rem)] font-semibold tracking-tighter text-foreground leading-none">
                 {s.count}
               </span>
-              <span className="text-[0.75rem] font-medium tracking-[0.25em] uppercase text-white/30">
+              <span className="text-[0.75rem] font-medium tracking-[0.25em] uppercase text-muted-foreground">
                 {s.name}
               </span>
             </motion.div>
@@ -116,8 +115,8 @@ const Partners = () => {
         </motion.div>
 
         {/* Compliance / Standard Badges */}
-        <div className="mt-20 pt-12 border-t border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <span className="text-[0.65rem] font-semibold tracking-[0.4em] uppercase text-white/20">
+        <div className="mt-20 pt-12 border-t border-border flex flex-col md:flex-row md:items-center justify-between gap-8">
+          <span className="text-[0.65rem] font-semibold tracking-[0.4em] uppercase text-muted-foreground">
             Standards & Compliance
           </span>
           <div className="flex flex-wrap gap-4">
@@ -128,10 +127,10 @@ const Partners = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="px-6 py-3 border border-white/10 rounded-full flex items-center gap-3"
+                className="px-6 py-3 border border-border rounded-full flex items-center gap-3"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                <span className="text-[0.7rem] font-medium tracking-widest uppercase text-white/50">
+                <span className="text-[0.7rem] font-medium tracking-widest uppercase text-foreground/60">
                   {t.label}
                 </span>
               </motion.div>

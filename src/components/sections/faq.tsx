@@ -28,7 +28,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }: FAQItemProps) => {
             isOpen ? "rotate-45" : "rotate-0"
           )}
         >
-          <Plus className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={1.5} />
+          <Plus className="w-8 h-8 md:w-10 md:h-10 text-foreground" strokeWidth={1.5} />
         </div>
       </button>
       <div
@@ -82,7 +82,7 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="bg-background py-[100px] md:py-[150px]" data-theme="dark">
+    <section className="bg-background py-[100px] md:py-[150px]">
       <div className="container">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
           {/* Left Column - Heading */}

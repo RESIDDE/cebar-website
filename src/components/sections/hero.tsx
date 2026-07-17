@@ -50,10 +50,9 @@ const Hero = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative w-full h-[150vh] bg-sidebar"
-      data-theme="dark"
+      className="relative w-full h-[150vh] bg-background overflow-hidden"
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center">
+      <div className="sticky top-0 h-[100svh] w-full overflow-hidden flex flex-col items-center justify-center">
         
         {/* CSS Noise Overlay */}
         <div 
@@ -73,33 +72,41 @@ const Hero = () => {
             alt="CEBAR Group Hero Background" 
             className="w-full h-[120%] object-cover object-center scale-110"
           />
-          {/* Cinematic gradient vignette */}
-          <div className="absolute inset-0 z-10 bg-linear-to-b from-sidebar/40 via-sidebar/30 to-sidebar/90 pointer-events-none" />
         </motion.div>
 
         {/* Content Container */}
         <motion.div 
           style={{ y, opacity, scale }}
-          className="relative z-30 container flex flex-col items-center text-center px-4"
+          className="relative z-30 w-full flex flex-col items-center text-center px-4 sm:px-8"
         >
+          {/* Trust pill badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="mb-8 inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white/90 text-xs font-bold tracking-widest uppercase"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+            Trusted by 5,000+ Professionals
+          </motion.div>
           <motion.h1 
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col items-center text-[#ffffff] font-display select-none uppercase w-full"
+            className="flex flex-col items-center text-white font-display select-none uppercase w-full drop-shadow-md"
           >
             <span className="block overflow-hidden pb-4 md:pb-6">
-              <motion.span variants={itemVariants} className="block text-[clamp(1.5rem,4vw,3.5rem)] font-medium tracking-[-0.02em] leading-none opacity-80 mix-blend-difference">
+              <motion.span variants={itemVariants} className="block text-[clamp(1.5rem,4vw,3.5rem)] font-medium tracking-[-0.02em] leading-none opacity-90">
               {title1}
             </motion.span>
           </span>
           <span className="block overflow-hidden pb-2">
-            <motion.span variants={itemVariants} className="block text-[clamp(3.5rem,14vw,14rem)] font-semibold tracking-[-0.04em] leading-[0.8] mix-blend-difference text-transparent bg-clip-text bg-linear-to-b from-white to-white/70">
+            <motion.span variants={itemVariants} className="block text-[clamp(3.5rem,14vw,14rem)] font-semibold tracking-[-0.04em] leading-[0.8] text-transparent bg-clip-text bg-linear-to-b from-white to-white/80">
               {title2}
             </motion.span>
           </span>
           <span className="block overflow-hidden pt-2">
-            <motion.span variants={itemVariants} className="block text-[clamp(3.5rem,14vw,14rem)] font-semibold tracking-[-0.04em] leading-[0.8] mix-blend-difference text-transparent bg-clip-text bg-linear-to-b from-white/90 to-white/30">
+            <motion.span variants={itemVariants} className="block text-[clamp(3.5rem,14vw,14rem)] font-semibold tracking-[-0.04em] leading-[0.8] text-transparent bg-clip-text bg-linear-to-b from-white/90 to-white/50">
               {title3}
             </motion.span>
           </span>
@@ -111,15 +118,15 @@ const Hero = () => {
           transition={{ delay: 1.8, duration: 1 }}
           className="mt-[8vh] flex flex-col items-center gap-6"
         >
-          <span className="text-[0.65rem] md:text-[0.75rem] font-mono uppercase tracking-[0.3em] text-white/50">
+          <span className="text-[0.65rem] md:text-[0.75rem] font-mono uppercase tracking-[0.3em] text-white/80">
             Scroll to discover
           </span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="p-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm"
+            className="p-3 rounded-full border border-border bg-muted/10 backdrop-blur-sm"
           >
-            <ArrowDown className="text-white/60 w-4 h-4" strokeWidth={2} />
+            <ArrowDown className="text-muted-foreground w-4 h-4" strokeWidth={2} />
           </motion.div>
         </motion.div>
       </motion.div>

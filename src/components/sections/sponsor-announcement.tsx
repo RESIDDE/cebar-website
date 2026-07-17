@@ -6,7 +6,7 @@ import { Sparkles } from "lucide-react";
 
 export default function SponsorAnnouncement() {
   return (
-    <section className="relative py-24 bg-white text-[#111111] overflow-x-hidden" data-theme="light">
+    <section className="relative py-24 bg-background text-foreground overflow-x-hidden">
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-center text-center space-y-8">
           <motion.div 
@@ -14,7 +14,7 @@ export default function SponsorAnnouncement() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-black text-sm font-sans font-semibold tracking-[0.2em] uppercase"
+            className="text-foreground text-sm font-sans font-semibold tracking-[0.2em] uppercase"
           >
             Headline Sponsor
           </motion.div>
@@ -26,11 +26,11 @@ export default function SponsorAnnouncement() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="max-w-4xl"
           >
-            <h2 className="text-[clamp(2rem,5vw,4rem)] font-semibold tracking-tight leading-[1.1] text-[#111]">
+            <h2 className="text-[clamp(2rem,5vw,4rem)] font-semibold tracking-tight leading-[1.1] text-foreground">
               Announcing Our Headline Sponsor for <br />
-              <span className="italic font-light text-[#D1000A]">Abuja Educators Conference 2026</span>
+              <span className="italic font-light text-accent">Abuja Educators Conference 2026</span>
             </h2>
-            <p className="mt-6 text-base md:text-lg text-black/60 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               We are incredibly proud to partner with Wema Bank as the official headline sponsor for the most anticipated educational symposium of the year. Together, we are empowering educators and shaping the future of education in Nigeria.
             </p>
           </motion.div>
@@ -40,7 +40,7 @@ export default function SponsorAnnouncement() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-12 bg-white p-8 md:p-12 rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.05)] border border-black/5 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 relative overflow-hidden max-w-4xl w-full mx-auto"
+            className="mt-12 bg-card p-8 md:p-12 rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.05)] border border-border flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 relative overflow-hidden max-w-4xl w-full mx-auto"
           >
             {/* Background glowing accent */}
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#D1000A]/5 rounded-full blur-[60px] pointer-events-none" />
@@ -54,14 +54,14 @@ export default function SponsorAnnouncement() {
               />
             </div>
             
-            <div className="w-px h-24 bg-black/10 hidden md:block" />
-            <div className="w-full h-px bg-black/10 md:hidden" />
+            <div className="w-px h-24 bg-border hidden md:block" />
+            <div className="w-full h-px bg-border md:hidden" />
             
             <div className="flex flex-col items-center md:items-start text-center md:text-left relative z-10">
-              <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[#111] mb-3">
+              <h3 className="text-xl md:text-2xl font-bold tracking-tight text-foreground mb-3">
                 Empowering Educational Growth
               </h3>
-              <p className="text-sm md:text-base text-black/60 mb-6 max-w-sm leading-relaxed">
+              <p className="text-sm md:text-base text-muted-foreground mb-6 max-w-sm leading-relaxed">
                 Discover exclusive financial solutions, partnership details, and special benefits tailored specifically for school owners and educators.
               </p>
               
@@ -75,7 +75,7 @@ export default function SponsorAnnouncement() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-12 w-full max-w-5xl mx-auto rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] relative border border-black/5 bg-white"
+            className="mt-12 w-full max-w-5xl mx-auto rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] relative border border-border bg-card"
           >
             <img 
               src="/wema ad confirmed .PNG" 
@@ -90,7 +90,7 @@ export default function SponsorAnnouncement() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-16 w-full max-w-5xl mx-auto rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] relative aspect-video border border-black/5"
+            className="mt-16 w-full max-w-5xl mx-auto rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] relative aspect-video border border-border"
           >
             {/* Subtle dark overlay for aesthetic depth */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none z-10" />

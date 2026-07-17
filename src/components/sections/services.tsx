@@ -81,7 +81,7 @@ const StackedCard = ({ chapter, index, totalCards, scrollYProgress }: { chapter:
         top: topOffset, 
         bottom: '0vh',
       }}
-      className="absolute left-[2vw] right-[2vw] bg-[#EBEBEB] text-[#111111] overflow-hidden flex flex-col justify-between pt-10 pb-[8vh] px-[5vw] rounded-t-3xl border-t border-black/10 origin-top shadow-[0_-10px_40px_rgba(0,0,0,0.05)]"
+      className="absolute left-[1vw] right-[1vw] sm:left-[2vw] sm:right-[2vw] bg-card text-card-foreground overflow-hidden flex flex-col justify-between pt-6 sm:pt-10 pb-[6vh] sm:pb-[8vh] px-4 sm:px-[5vw] rounded-t-[2rem] sm:rounded-t-[2.5rem] border-t border-border origin-top shadow-[0_-8px_40px_rgba(0,0,0,0.06)]"
     >
       {/* Dark overlay for depth simulation */}
       <motion.div 
@@ -90,15 +90,15 @@ const StackedCard = ({ chapter, index, totalCards, scrollYProgress }: { chapter:
       />
       {/* Top Header Row */}
       <div className="flex justify-between items-start w-full">
-        <h2 className="text-[clamp(3.5rem,8vw,6.5rem)] leading-[0.95] tracking-[-0.04em] font-medium max-w-[60%]">
+        <h2 className="text-[clamp(2rem,6vw,6.5rem)] leading-[0.95] tracking-[-0.04em] font-medium max-w-[60%]">
           {chapter.title}
         </h2>
         
         <div className="text-right">
-          <div className="flex gap-4 items-baseline justify-end border-t border-black/20 pt-2 w-[150px] md:w-[200px]">
+          <div className="flex gap-4 items-baseline justify-end border-t border-border pt-2 w-[120px] md:w-[200px]">
              <span className="text-[0.6rem] uppercase tracking-widest font-semibold">SERVICE AREA:</span>
           </div>
-          <span className="text-[clamp(5rem,12vw,14rem)] leading-[0.8] tracking-[-0.05em] font-medium inline-block relative -right-[2vw]">
+          <span className="text-[clamp(3rem,10vw,14rem)] leading-[0.8] tracking-[-0.05em] font-medium inline-block relative -right-[2vw]">
             {chapter.num}
           </span>
         </div>
@@ -106,23 +106,22 @@ const StackedCard = ({ chapter, index, totalCards, scrollYProgress }: { chapter:
 
       {/* Bottom Capabilities List */}
       <div className="w-full mt-auto">
-        <h3 className="text-[1.2rem] md:text-[1.5rem] font-semibold tracking-[-0.02em] mb-8">
+        <h3 className="text-[1rem] sm:text-[1.2rem] md:text-[1.5rem] font-semibold tracking-[-0.02em] mb-4 sm:mb-8">
           CAPABILITIES
         </h3>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-0 border-t border-black/20 pt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-0 border-t border-border pt-4">
           {chapter.items.map((item: any, i: number) => {
             const Icon = item.icon;
             return (
-              <div key={i} className="flex flex-col py-6 border-b border-black/10">
-                <div className="flex items-center gap-4 mb-3 text-[0.7rem] md:text-[0.8rem] font-mono tracking-wider">
-                  <span className="opacity-60">{item.id}</span>
-                  <div className="flex items-center gap-2">
-                    {Icon && <Icon className="w-4 h-4 opacity-80" strokeWidth={2.5} />}
-                    <span className="uppercase font-semibold">{item.title}</span>
+              <div key={i} className="flex flex-col py-4 sm:py-6 border-b border-border">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-8 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+                    {Icon && <Icon className="w-4 h-4 text-accent" strokeWidth={2} />}
                   </div>
+                  <span className="text-[0.7rem] md:text-[0.8rem] font-bold tracking-wider uppercase text-foreground/70">{item.id} · {item.title}</span>
                 </div>
-                <p className="text-[0.95rem] md:text-[1.05rem] leading-[1.6] opacity-75 max-w-[90%]">
+                <p className="text-[0.85rem] sm:text-[0.95rem] md:text-[1.05rem] leading-[1.6] opacity-75 max-w-[90%]">
                   {item.description}
                 </p>
               </div>
@@ -145,9 +144,8 @@ const Services = () => {
   return (
     <section 
       ref={containerRef}
-      className="bg-[#EBEBEB] relative" 
+      className="bg-background relative" 
       style={{ height: `${(chapters.length > 1 ? chapters.length - 1 : 1) * 100 + 200}vh` }}
-      data-theme="light"
     >
       <div className="sticky top-0 h-screen w-full flex flex-col pt-[5vh] items-center justify-start overflow-hidden">
         

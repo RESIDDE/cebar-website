@@ -6,7 +6,11 @@ import { ArrowRight } from "lucide-react";
 
 const CtaSection = () => {
   return (
-    <section className="relative bg-background overflow-hidden" data-theme="dark">
+    <section className="relative bg-background overflow-hidden">
+      {/* Soft red gradient blob */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] blob-red opacity-60" />
+      </div>
       {/* Full-width accent line at top */}
       <div className="w-full h-px bg-border" />
       
@@ -48,7 +52,7 @@ const CtaSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="group inline-flex items-center gap-3 bg-white text-black px-10 py-5 text-[0.875rem] font-bold tracking-[0.15em] uppercase hover:bg-accent transition-colors duration-500"
+          className="group inline-flex items-center gap-3 bg-accent text-white px-10 py-5 rounded-full text-[0.875rem] font-bold tracking-[0.1em] uppercase hover:bg-foreground transition-colors duration-500 shadow-lg shadow-accent/20"
         >
           Book a Consultation
           <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-2" />

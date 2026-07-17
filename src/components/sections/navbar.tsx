@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import ThemeToggle from "@/components/ui/theme-toggle";
 
 interface NavbarProps {
   onMenuToggle?: () => void;
@@ -45,7 +46,6 @@ const Navbar = ({ onMenuToggle }: NavbarProps) => {
     <nav 
       className="fixed top-0 left-0 w-full z-50 flex items-center justify-center py-6 pointer-events-none mix-blend-difference text-white transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
       style={{ transform: visible ? "translateY(0)" : "translateY(-120px)" }}
-      data-theme="dark"
     >
       <div 
         className={`flex w-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -125,51 +125,65 @@ const Navbar = ({ onMenuToggle }: NavbarProps) => {
           )}
         </AnimatePresence>
 
-        {/* Menu Toggle Container */}
-        <motion.button 
-          layout
-          onClick={onMenuToggle}
-          className={`group pointer-events-auto relative flex items-center justify-center overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            isScrolled 
-              ? 'h-[46px] w-[54px] md:w-[60px] rounded-2xl bg-white/10 backdrop-blur-md border border-white/20' 
-              : 'h-[53px] w-[64px] md:w-[84px] bg-transparent'
-          }`}
-          style={isScrolled ? { boxShadow: '0 4px 30px rgba(0,0,0,0.1)' } : {}}
-          aria-label="Open Menu"
-        >
-          <AnimatePresence mode="popLayout">
-            {isScrolled ? (
-              <motion.div 
-                key="dots-horizontal"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-                className="flex items-center gap-1.5"
-              >
-                <span className="w-[4px] h-[4px] bg-white rounded-full transition-all duration-300 group-hover:scale-125" />
-                <span className="w-[4px] h-[4px] bg-white rounded-full transition-all duration-300 group-hover:scale-125 delay-75" />
-                <span className="w-[4px] h-[4px] bg-white rounded-full transition-all duration-300 group-hover:scale-125 delay-150" />
-              </motion.div>
-            ) : (
-              <motion.div 
-                key="dots-grid"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.3 }}
-                className="grid grid-cols-3 gap-1.5 p-1 relative w-[24px]"
-              >
-                {[...Array(9)].map((_, i) => (
-                  <span 
-                    key={i} 
-                    className="w-[3px] h-[3px] bg-white rounded-full transition-all duration-300 group-hover:scale-125"
-                  />
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.button>
+        {/* Right Actions Container */}
+        <div className="flex items-center gap-3">
+          <div 
+            className={`pointer-events-auto flex items-center justify-center transition-all duration-500 ${
+              isScrolled 
+                ? 'h-[46px] w-[46px] rounded-2xl bg-white/10 backdrop-blur-md border border-white/20' 
+                : 'h-[53px] w-[53px]'
+            }`}
+            style={isScrolled ? { boxShadow: '0 4px 30px rgba(0,0,0,0.1)' } : {}}
+          >
+            <ThemeToggle />
+          </div>
+
+          {/* Menu Toggle Container */}
+          <motion.button 
+            layout
+            onClick={onMenuToggle}
+            className={`group pointer-events-auto relative flex items-center justify-center overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              isScrolled 
+                ? 'h-[46px] w-[54px] md:w-[60px] rounded-2xl bg-white/10 backdrop-blur-md border border-white/20' 
+                : 'h-[53px] w-[64px] md:w-[84px] bg-transparent'
+            }`}
+            style={isScrolled ? { boxShadow: '0 4px 30px rgba(0,0,0,0.1)' } : {}}
+            aria-label="Open Menu"
+          >
+            <AnimatePresence mode="popLayout">
+              {isScrolled ? (
+                <motion.div 
+                  key="dots-horizontal"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex items-center gap-1.5"
+                >
+                  <span className="w-[4px] h-[4px] bg-white rounded-full transition-all duration-300 group-hover:scale-125" />
+                  <span className="w-[4px] h-[4px] bg-white rounded-full transition-all duration-300 group-hover:scale-125 delay-75" />
+                  <span className="w-[4px] h-[4px] bg-white rounded-full transition-all duration-300 group-hover:scale-125 delay-150" />
+                </motion.div>
+              ) : (
+                <motion.div 
+                  key="dots-grid"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.3 }}
+                  className="grid grid-cols-3 gap-1.5 p-1 relative w-[24px]"
+                >
+                  {[...Array(9)].map((_, i) => (
+                    <span 
+                      key={i} 
+                      className="w-[3px] h-[3px] bg-white rounded-full transition-all duration-300 group-hover:scale-125"
+                    />
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
+        </div>
       </div>
     </nav>
   );

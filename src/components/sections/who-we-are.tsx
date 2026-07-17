@@ -1,141 +1,84 @@
 "use client";
 
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const captions = [
-  { text: "WE EMPOWER", highlight: "EDUCATORS.", color: "white" },
+  { text: "WE EMPOWER", highlight: "EDUCATORS.", color: "#ef4444" },
   { text: "WE DELIVER WITH ABSOLUTE", highlight: "EXCELLENCE.", color: "#ef4444" },
   { text: "WE DRIVE TRANSFORMATIVE", highlight: "IMPACT.", color: "#ef4444" },
-  { text: "WE SHAPE ORGANISATIONS FOR", highlight: "GROWTH.", color: "white" },
+  { text: "WE SHAPE ORGANISATIONS FOR", highlight: "GROWTH.", color: "#ef4444" },
   { text: "WE ARE", highlight: "CEBAR GROUP.", color: "#ef4444" },
 ];
 
-const TextSlide = ({ caption, progress, index, total }: { caption: any, progress: any, index: number, total: number }) => {
-  const start = index / total;
-  const end = (index + 1) / total;
-  
-  const isLast = index === total - 1;
-  const opacity = useTransform(
-    progress, 
-    [start, start + 0.1, end - 0.1, end], 
-    [0, 1, 1, isLast ? 1 : 0]
-  );
-  const scale = useTransform(
-    progress, 
-    [start, start + 0.1, end - 0.1, end], 
-    [0.8, 1, 1, isLast ? 1 : 1.2]
-  );
-  const y = useTransform(
-    progress, 
-    [start, start + 0.1, end - 0.1, end], 
-    [50, 0, 0, isLast ? 0 : -50]
-  );
-  
-  const smoothOpacity = useSpring(opacity, { stiffness: 100, damping: 20 });
-  const smoothScale = useSpring(scale, { stiffness: 100, damping: 20 });
-  const smoothY = useSpring(y, { stiffness: 100, damping: 20 });
-
-  return (
-    <motion.div 
-      style={{ 
-        opacity: smoothOpacity, 
-        scale: smoothScale, 
-        y: smoothY,
-        position: 'absolute',
-        inset: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        padding: '0 5vw',
-        zIndex: 100 - index
-      }}
-    >
-      <h2 className="text-[clamp(3.5rem,12vw,10rem)] leading-[0.85] tracking-[-0.04em] font-bold text-white uppercase select-none">
-        {caption.text} <br />
-        <span style={{ color: caption.color }} className="italic font-light">
-          {caption.highlight}
-        </span>
-      </h2>
-    </motion.div>
-  );
-};
-
-const ProgressBarItem = ({ scrollYProgress, index, total }: { scrollYProgress: any, index: number, total: number }) => {
-  const opacity = useTransform(
-    scrollYProgress, 
-    [index / total, (index + 0.5) / total, (index + 1) / total], 
-    [0.2, 1, 0.2]
-  );
-  return (
-    <motion.div 
-      style={{ opacity }}
-      className="w-1 h-8 bg-white/40 rounded-full"
-    />
-  );
-};
-
 const WhoWeAre = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-
   return (
-    <section 
-      ref={containerRef}
-      className="relative h-[500vh] bg-[#020202] rounded-[4rem]"
-    >
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-        
-        {/* Cinematic Background Image with Parallax — Using actual Cebar event photo */}
-        <motion.div 
-          style={{ y: bgY, scale: bgScale }}
-          className="absolute inset-0 w-full h-full z-0 overflow-hidden"
+    <section className="relative bg-background py-16 sm:py-24 md:py-32 overflow-hidden border-t border-border rounded-[2rem] sm:rounded-[4rem]">
+      <div className="w-full mx-auto px-4 sm:px-[5vw] max-w-[1440px]">
+
+        {/* Section label */}
+        <motion.span
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="block text-xs font-bold tracking-[0.4em] uppercase text-accent mb-12 text-center"
         >
-          <img 
-            src="https://static.wixstatic.com/media/f167bf_fe3e5bdeaa294769a4936bf5b10f268b~mv2.jpg/v1/fit/w_960,h_724,q_90,enc_avif,quality_auto/f167bf_fe3e5bdeaa294769a4936bf5b10f268b~mv2.jpg" 
-            alt="CEBAR Group Training Session" 
-            className="w-full h-[120%] object-cover object-center opacity-40 grayscale-[0.5] brightness-50"
-          />
-          <div className="absolute inset-0 bg-black/60 bg-linear-to-b from-black/80 via-transparent to-black/80 z-10" />
-          <div className="absolute inset-0 bg-[#ef4444]/2 mix-blend-overlay z-15" />
-        </motion.div>
+          Who We Are
+        </motion.span>
 
-        {/* Background Decorative Elements */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-10 z-20">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] border border-white/20 rounded-full" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen h-screen border border-white/10 rounded-full" />
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start">
 
-        {/* Cinematic Slides */}
-        {captions.map((caption, i) => (
-          <TextSlide 
-            key={i} 
-            caption={caption} 
-            progress={scrollYProgress} 
-            index={i} 
-            total={captions.length} 
-          />
-        ))}
+          {/* Left: Stacked statements */}
+          <div className="flex flex-col gap-8">
+            {captions.map((caption, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="flex items-start gap-4 rounded-2xl p-5 border border-border card-shadow bg-card hover:shadow-md transition-shadow duration-300"
+              >
+                <span className="text-[0.6rem] font-black text-white bg-accent w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-1">
+                  {i + 1}
+                </span>
+                <h2 className="text-[clamp(1.6rem,3.5vw,3rem)] font-bold leading-[1.05] tracking-tight text-foreground uppercase">
+                  {caption.text}{" "}
+                  <span style={{ color: caption.color }} className="italic font-light">
+                    {caption.highlight}
+                  </span>
+                </h2>
+              </motion.div>
+            ))}
+          </div>
 
-        {/* Progress Indicator Side Text */}
-        <div className="absolute right-[5vw] top-1/2 -translate-y-1/2 flex flex-col items-end gap-2 text-[10px] tracking-[0.4em] text-white/30 uppercase vertical-text">
-          <span className="mb-4">Who We Are</span>
-          {captions.map((_, i) => (
-            <ProgressBarItem 
-              key={i}
-              scrollYProgress={scrollYProgress}
-              index={i}
-              total={captions.length}
-            />
-          ))}
+          {/* Right: Image + supporting text */}
+          <div className="flex flex-col gap-8 lg:sticky lg:top-28">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.97 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7 }}
+              className="relative rounded-[2rem] overflow-hidden aspect-[4/3] border border-border shadow-sm"
+            >
+              <img
+                src="https://static.wixstatic.com/media/f167bf_fe3e5bdeaa294769a4936bf5b10f268b~mv2.jpg/v1/fit/w_960,h_724,q_90,enc_avif,quality_auto/f167bf_fe3e5bdeaa294769a4936bf5b10f268b~mv2.jpg"
+                alt="CEBAR Group Training Session"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-muted-foreground text-lg leading-relaxed font-light"
+            >
+              CEBAR Group is a UK-based education and training consultancy on a mission to transform how organisations learn, grow, and lead — delivering measurable impact across education, corporate, and government sectors.
+            </motion.p>
+          </div>
         </div>
       </div>
     </section>
@@ -143,3 +86,4 @@ const WhoWeAre = () => {
 };
 
 export default WhoWeAre;
+

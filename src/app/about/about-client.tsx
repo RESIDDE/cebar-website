@@ -78,12 +78,12 @@ export default function AboutClient() {
   const missionOpacity = useTransform(missionProgress, [0, 0.2, 0.75, 1], [0, 1, 1, 0]);
 
   return (
-    <main className="bg-[#f0ebe3] text-[#111] selection:bg-[#D1000A] selection:text-white">
+    <main className="bg-[#f0ebe3] text-[#111] selection:bg-[#D1000A] selection:text-white overflow-x-hidden">
       <Navbar onMenuToggle={() => setMenuOpen(true)} />
       <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
       {/* HERO */}
-      <section className="min-h-[100vh] flex items-end px-[5vw] pt-40 pb-24">
+      <section className="min-h-[100svh] flex items-end px-4 sm:px-[5vw] pt-28 sm:pt-40 pb-12 sm:pb-24">
         <div className="max-w-[1600px] w-full">
           <motion.span
             initial={{ opacity: 0, x: -20 }}
@@ -93,7 +93,7 @@ export default function AboutClient() {
           >
             About CEBAR Group
           </motion.span>
-          <h1 className="text-[clamp(4.5rem,13vw,13rem)] leading-[0.87] font-medium uppercase tracking-tighter mb-16">
+          <h1 className="text-[clamp(2.8rem,9vw,10rem)] leading-[0.9] font-bold uppercase tracking-tighter mb-8 sm:mb-16">
             <SplitText text="Empowering" />
             <SplitText text="Growth" className="text-amber-600 italic" />
             <SplitText text="Across Sectors" />
@@ -104,7 +104,7 @@ export default function AboutClient() {
             transition={{ duration: 1, delay: 0.8 }}
             className="max-w-2xl ml-auto"
           >
-            <p className="text-xl md:text-2xl text-[#111]/60 font-light leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-[#111]/60 font-light leading-relaxed">
               We are committed to supporting educators, business professionals, and public sector leaders by delivering high-quality training and comprehensive human resources services.
             </p>
           </motion.div>
@@ -112,17 +112,17 @@ export default function AboutClient() {
       </section>
 
       {/* MISSION STATEMENT */}
-      <section ref={missionRef} className="h-screen flex items-center justify-center relative overflow-hidden bg-[#111] text-white rounded-[4rem] mx-4">
+      <section ref={missionRef} className="min-h-[60vh] sm:h-screen flex items-center justify-center relative overflow-hidden bg-[#111] text-white rounded-[2rem] sm:rounded-[4rem] mx-3 sm:mx-4 my-6 sm:my-0">
         <motion.div
           style={{ scale: missionScale, opacity: missionOpacity }}
           className="max-w-[1100px] text-center px-[5vw] z-10"
         >
           <span className="text-[10px] font-black tracking-[0.5em] uppercase text-white/30 mb-8 block">Our Mission</span>
-          <h2 className="text-[clamp(2rem,5vw,4.5rem)] leading-[1.1] font-medium tracking-tight mb-10">
+          <h2 className="text-[clamp(1.5rem,4vw,4rem)] leading-[1.15] font-medium tracking-tight mb-6 sm:mb-10">
             Our mission goes beyond education — we assist organisations in the private and government sectors to achieve{" "}
             <span className="text-amber-400 italic">excellence and long-term success.</span>
           </h2>
-          <p className="text-xl md:text-2xl font-light text-white/50 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl font-light text-white/50 leading-relaxed max-w-2xl mx-auto">
             We believe that effective training and reliable HR support can create real and lasting improvements across all areas of work.
           </p>
         </motion.div>
@@ -132,11 +132,11 @@ export default function AboutClient() {
       </section>
 
       {/* SECTORS */}
-      <section className="py-[160px] px-[5vw]">
+      <section className="py-16 sm:py-24 lg:py-[120px] px-4 sm:px-[5vw]">
         <div className="max-w-[1600px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-24">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 sm:gap-12 mb-12 sm:mb-20">
             <FadeUp>
-              <h2 className="text-[clamp(3rem,8vw,7rem)] leading-[0.9] font-medium uppercase tracking-tighter">
+              <h2 className="text-[clamp(2rem,6vw,5.5rem)] leading-[0.95] font-bold uppercase tracking-tighter">
                 Tailored Support<br />For Every Sector
               </h2>
             </FadeUp>
@@ -149,12 +149,12 @@ export default function AboutClient() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {pillars.map((p, i) => (
               <FadeUp key={p.num} delay={i * 0.15}>
-                <div className="group relative border border-[#111]/10 rounded-[2.5rem] p-10 md:p-14 flex flex-col justify-between overflow-hidden bg-white/50 hover:bg-amber-50 transition-colors duration-700 min-h-[420px]">
+                <div className="group relative border border-[#111]/10 rounded-[1.5rem] sm:rounded-[2.5rem] p-6 sm:p-10 md:p-14 flex flex-col justify-between overflow-hidden bg-white/50 hover:bg-amber-50 transition-colors duration-700 min-h-[320px] sm:min-h-[420px]">
                   <div>
                     <span className="text-[10px] font-black tracking-widest uppercase text-[#111]/30 group-hover:text-amber-600 mb-10 block transition-colors">{p.num}</span>
-                    <h3 className="text-[clamp(2.5rem,5vw,4rem)] font-medium uppercase tracking-tight leading-none mb-8 group-hover:italic transition-all">{p.title}</h3>
+                    <h3 className="text-[clamp(1.8rem,4vw,3rem)] font-bold uppercase tracking-tight leading-none mb-5 sm:mb-8 group-hover:italic transition-all">{p.title}</h3>
                   </div>
-                  <p className="text-[#111]/60 leading-relaxed font-light text-lg">{p.text}</p>
+                  <p className="text-[#111]/60 leading-relaxed font-light text-sm sm:text-base">{p.text}</p>
                 </div>
               </FadeUp>
             ))}
@@ -163,8 +163,8 @@ export default function AboutClient() {
       </section>
 
       {/* STORY */}
-      <section className="py-[160px] px-[5vw] bg-white rounded-t-[4rem]">
-        <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+      <section className="py-16 sm:py-24 lg:py-[120px] px-4 sm:px-[5vw] bg-white rounded-t-[2rem] sm:rounded-t-[4rem]">
+        <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-16 lg:gap-24 items-center">
           <div className="lg:col-span-5">
             <FadeUp>
               <div className="relative aspect-[3/4] w-full rounded-[3rem] overflow-hidden group">
@@ -182,10 +182,10 @@ export default function AboutClient() {
           <div className="lg:col-span-7">
             <FadeUp delay={0.2}>
               <span className="text-[10px] font-black tracking-[0.5em] uppercase text-[#111]/40 mb-8 block">Our Story</span>
-              <h3 className="text-4xl md:text-6xl font-medium uppercase tracking-tight mb-12 leading-none">
+              <h3 className="text-2xl sm:text-4xl md:text-5xl font-bold uppercase tracking-tight mb-8 sm:mb-12 leading-none">
                 Trusted Relationships<br /><span className="italic">Across Industries</span>
               </h3>
-              <div className="space-y-8 text-xl text-[#111]/65 font-light leading-relaxed">
+              <div className="space-y-6 sm:space-y-8 text-base sm:text-lg text-[#111]/65 font-light leading-relaxed">
                 <p>
                   CEBAR Group was founded with a clear purpose: to build a bridge between quality training and the real-world challenges faced by educators, businesses, and governments. We build genuine working relationships with schools, businesses, and government bodies.
                 </p>
@@ -202,9 +202,9 @@ export default function AboutClient() {
       </section>
 
       {/* VALUES */}
-      <section className="py-[150px] px-[5vw]">
+      <section className="py-16 sm:py-24 lg:py-[120px] px-4 sm:px-[5vw]">
         <div className="max-w-[1600px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-24">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 sm:gap-12 mb-12 sm:mb-20">
             <FadeUp>
               <h2 className="text-[clamp(3rem,8vw,7rem)] leading-[0.9] font-medium uppercase tracking-tighter">
                 Commitment<br />To Standards
@@ -219,10 +219,10 @@ export default function AboutClient() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {values.map((item, i) => (
               <FadeUp key={item.title} delay={i * 0.1}>
-                <div className="border border-[#111]/10 rounded-[2rem] p-10 flex flex-col justify-between min-h-[320px] group hover:bg-amber-50 transition-colors duration-700">
+                <div className="border border-[#111]/10 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 flex flex-col justify-between min-h-[260px] sm:min-h-[320px] group hover:bg-amber-50 transition-colors duration-700">
                   <div>
                     <span className="text-[10px] font-black tracking-widest uppercase text-[#111]/25 group-hover:text-amber-600 mb-10 block transition-colors">0{i + 1}</span>
-                    <h4 className="text-3xl md:text-4xl font-medium uppercase mb-6 group-hover:italic transition-all">{item.title}</h4>
+                    <h4 className="text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 group-hover:italic transition-all">{item.title}</h4>
                   </div>
                   <p className="text-[#111]/60 leading-relaxed font-light">{item.text}</p>
                 </div>
@@ -233,8 +233,8 @@ export default function AboutClient() {
       </section>
 
       {/* TEAM */}
-      <section className="py-[120px] relative">
-        <div className="max-w-[1600px] mx-auto px-[5vw] mb-16">
+      <section className="py-12 sm:py-[120px] relative">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-[5vw] mb-10 sm:mb-16">
           <FadeUp>
             <span className="text-[10px] font-black tracking-[0.5em] uppercase text-[#111]/40 mb-6 block">Meet the People</span>
             <h2 className="text-[clamp(3rem,8vw,7rem)] leading-[0.9] font-medium uppercase tracking-tighter">
