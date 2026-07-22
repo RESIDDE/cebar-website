@@ -56,4 +56,4 @@ src/
 CEBAR Group's digital presence represents **structure, credibility, and impact**. The website utilizes:
 - **Primary Base**: A bold, modern mix of deep obsidian dark-mode canvases (`#000000`, `#050505`) and rich off-white tones (`#f0ebe3`, `#f5f5f5`) to cleanly divide corporate sections.
 - **Accent Identity**: High-end crimson red (`#D1000A`), applied precisely across glow states, custom borders, counts, key interactive highlights, and call-to-actions to convey authority and educational passion.
-- **Glassmorphism & Parallax**: Subtle, blurred transparent panels and delicate parallax cards floating over deep vignette overlays to maintain layout depth.
+- **Glassmorphism & Parallax**: Subtle, blurred transparent panels and delicate parallax cards floating over deep vignette overlays to maintain layout depth
