@@ -76,7 +76,7 @@ export default function ClientProjectDetails({ project }: { project: ProjectData
   const nextScale = useTransform(nextScroll, [0, 1], [1.2, 1]);
 
   return (
-    <main ref={containerRef} className="bg-[#f0ebe3] text-[#111] min-h-screen selection:bg-[#D1000A] selection:text-white relative">
+    <main ref={containerRef} className="min-h-screen selection:bg-[#D1000A] selection:text-white relative">
       <Navbar onMenuToggle={() => {}} />
 
       {/* Progress Bar */}
@@ -86,7 +86,7 @@ export default function ClientProjectDetails({ project }: { project: ProjectData
       />
 
       {/* --- HERO SECTION --- */}
-      <section ref={heroRef} className="relative h-screen w-full overflow-hidden bg-[#111]">
+      <section ref={heroRef} className="relative h-screen w-full overflow-hidden bg-background text-foreground">
         <motion.div 
           style={{ y: heroY, opacity: heroOpacity, scale: heroScale }}
           className="absolute inset-0 w-full h-full"
@@ -220,15 +220,15 @@ export default function ClientProjectDetails({ project }: { project: ProjectData
       )}
 
       {/* --- CASE STUDY (Dark Mode) --- */}
-      <section className="bg-[#111] text-[#f0ebe3] py-[220px] px-[5vw] rounded-t-[4rem] relative overflow-hidden">
+      <section className="bg-background text-foreground py-[220px] px-[5vw] rounded-t-[4rem] relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 relative z-10">
           <div className="space-y-12">
             <FadeUp>
-              <div className="inline-flex items-center gap-4 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
+              <div className="inline-flex items-center gap-4 px-4 py-2 rounded-full border border-black/10 bg-black/5 backdrop-blur-md mb-8">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#D1000A] animate-pulse"></span>
-                <span className="uppercase tracking-[0.3em] text-[10px] font-bold text-white/60">Challenge</span>
+                <span className="uppercase tracking-[0.3em] text-[10px] font-bold text-black/60">Challenge</span>
               </div>
-              <p className="text-2xl md:text-3xl leading-[1.4] font-light text-white/90">
+              <p className="text-2xl md:text-3xl leading-[1.4] font-light text-black/90">
                 {project.challenge}
               </p>
             </FadeUp>
@@ -236,11 +236,11 @@ export default function ClientProjectDetails({ project }: { project: ProjectData
           
           <div className="space-y-12 lg:mt-48">
             <FadeUp delay={0.2}>
-              <div className="inline-flex items-center gap-4 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
+              <div className="inline-flex items-center gap-4 px-4 py-2 rounded-full border border-black/10 bg-black/5 backdrop-blur-md mb-8">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#D1000A] animate-pulse"></span>
-                <span className="uppercase tracking-[0.3em] text-[10px] font-bold text-white/60">Solution</span>
+                <span className="uppercase tracking-[0.3em] text-[10px] font-bold text-black/60">Solution</span>
               </div>
-              <p className="text-2xl md:text-3xl leading-[1.4] font-light text-white/90">
+              <p className="text-2xl md:text-3xl leading-[1.4] font-light text-black/90">
                 {project.solution}
               </p>
             </FadeUp>
@@ -253,13 +253,13 @@ export default function ClientProjectDetails({ project }: { project: ProjectData
             <div className="h-px w-full bg-linear-to-r from-[#D1000A]/50 to-transparent mb-16" />
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
               <div className="lg:col-span-3">
-                <span className="uppercase tracking-[0.4em] text-[10px] font-black text-white/30">Transformation</span>
+                <span className="uppercase tracking-[0.4em] text-[10px] font-black text-black/30">Transformation</span>
               </div>
               <div className="lg:col-span-9">
                 <h4 className="text-[clamp(1.8rem,6vw,5rem)] leading-none font-medium text-[#D1000A] italic flex flex-col uppercase">
                    <span className="mb-4">"{project.impact.split(" and ")[0]}"</span>
                    {project.impact.includes("and") && (
-                     <span className="text-white/40 text-[0.5em] tracking-tighter not-italic font-light">
+                     <span className="text-black/40 text-[0.5em] tracking-tighter not-italic font-light">
                        & {project.impact.split(" and ")[1]}
                      </span>
                    )}
@@ -270,13 +270,13 @@ export default function ClientProjectDetails({ project }: { project: ProjectData
         </div>
 
         {/* Decorative Circles */}
-        <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] rounded-full border border-white/3 pointer-events-none" />
+        <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] rounded-full border border-black/3 pointer-events-none" />
         <div className="absolute bottom-[-10%] left-[-5%] w-[30vw] h-[30vw] rounded-full bg-[#D1000A]/2 blur-[100px] pointer-events-none" />
       </section>
 
       {/* --- NEXT PROJECT (Cinematic) --- */}
       {project.nextProjectSlug && project.nextProjectTitle && (
-        <section ref={nextTargetRef} className="relative h-screen w-full bg-[#020202] overflow-hidden flex items-center justify-center group">
+        <section ref={nextTargetRef} className="relative h-screen w-full bg-background overflow-hidden flex items-center justify-center group">
           <motion.div 
             style={{ y: nextY, scale: nextScale }} 
             className="absolute inset-0 opacity-60 transition-opacity duration-1000 group-hover:opacity-80"

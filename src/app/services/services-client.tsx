@@ -107,7 +107,7 @@ export default function ServicesClient() {
   const scaleBackground = useTransform(heroProgress, [0, 1], [1, 1.15]);
 
   return (
-    <main className="bg-[#0a0a0a] text-[#f0ebe3] selection:bg-amber-400 selection:text-[#111]">
+    <main className="selection:bg-[#D1000A] selection:text-white">
       <Navbar onMenuToggle={() => setMenuOpen(true)} />
       <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
@@ -167,7 +167,7 @@ export default function ServicesClient() {
       </section>
 
       {/* SECTOR SHOWCASE SECTION */}
-      <section className="relative py-32 px-[5vw] bg-[#0a0a0a] overflow-hidden border-t border-white/5">
+      <section className="relative py-32 px-[5vw] bg-background overflow-hidden border-t border-black/5">
         {/* Subtle ambient glows */}
         <div className="absolute top-[10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-amber-500/5 blur-[120px] pointer-events-none" />
         <div className="absolute bottom-[20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-indigo-500/5 blur-[150px] pointer-events-none" />
@@ -326,7 +326,7 @@ export default function ServicesClient() {
       </section>
 
       {/* PROCESS SECTION */}
-      <section className="py-[180px] px-[5vw] bg-[#f0ebe3] text-[#111] rounded-t-[4rem]">
+      <section className="py-[180px] px-[5vw] bg-background text-foreground rounded-t-[4rem]">
         <div className="max-w-[1600px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-end mb-24">
             <div className="lg:col-span-8">
@@ -364,7 +364,7 @@ export default function ServicesClient() {
       </section>
 
       {/* CTA SECTION */}
-      <section className="py-[150px] px-[5vw] bg-[#111] text-center rounded-t-[4rem]">
+      <section className="py-[150px] px-[5vw] bg-background text-foreground text-center rounded-t-[4rem]">
         <FadeUp>
           <span className="text-[10px] font-black tracking-[0.5em] uppercase text-white/30 mb-8 block">Get Started</span>
           <h3 className="text-[clamp(2.5rem,7vw,6rem)] font-medium leading-tight tracking-tight mb-6 uppercase">

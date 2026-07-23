@@ -29,12 +29,12 @@ export default function OurTeamClient() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <main className="bg-[#020202] text-white selection:bg-[#D1000A] selection:text-white">
+    <main className="selection:bg-[#D1000A] selection:text-white">
       <Navbar onMenuToggle={() => setMenuOpen(true)} />
       <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
       {/* HERO */}
-      <section className="min-h-[50vh] flex items-end px-[5vw] pt-40 pb-0 bg-[#020202] text-white relative z-10">
+      <section className="min-h-[50vh] flex items-end px-[5vw] pt-40 pb-0 bg-background text-foreground relative z-10">
         <div className="max-w-[1600px] w-full">
           <motion.span
             initial={{ opacity: 0, x: -20 }}

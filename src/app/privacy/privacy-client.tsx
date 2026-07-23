@@ -9,7 +9,7 @@ export default function PrivacyClient() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <main className="bg-[#020202] text-white selection:bg-[#D1000A] selection:text-white min-h-screen flex flex-col">
+    <main className="selection:bg-[#D1000A] selection:text-white min-h-screen flex flex-col">
       <Navbar onMenuToggle={() => setMenuOpen(true)} />
       <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
       <div className="flex-1 max-w-[800px] mx-auto px-[5vw] pt-48 pb-32">

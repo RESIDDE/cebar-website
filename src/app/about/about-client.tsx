@@ -78,7 +78,7 @@ export default function AboutClient() {
   const missionOpacity = useTransform(missionProgress, [0, 0.2, 0.75, 1], [0, 1, 1, 0]);
 
   return (
-    <main className="bg-[#f0ebe3] text-[#111] selection:bg-[#D1000A] selection:text-white overflow-x-hidden">
+    <main className="selection:bg-[#D1000A] selection:text-white overflow-x-hidden">
       <Navbar onMenuToggle={() => setMenuOpen(true)} />
       <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 

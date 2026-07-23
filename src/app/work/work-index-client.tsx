@@ -64,7 +64,7 @@ export default function WorkIndexClient({ projects }: { projects: ProjectData[] 
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <main ref={containerRef} className="bg-[#111] text-[#f0ebe3] min-h-screen selection:bg-[#D1000A] selection:text-white">
+    <main ref={containerRef} className="min-h-screen selection:bg-[#D1000A] selection:text-white">
       <Navbar onMenuToggle={() => setMenuOpen(true)} />
       <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
