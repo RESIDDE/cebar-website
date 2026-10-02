@@ -1,45 +1,40 @@
-"use client";
+import { Inter } from "next/font/google";
+import "@/components/home/home.css";
+import HomeShell from "@/components/home/home-shell";
+import AppleNav from "@/components/home/apple-nav";
+import Hero from "@/components/home/hero";
+import Manifesto from "@/components/home/manifesto";
+import Impact from "@/components/home/impact";
+import ServicesBento from "@/components/home/services-bento";
+import EventsHighlights from "@/components/home/events-highlights";
+import PartnersPress from "@/components/home/partners-press";
+import TeamCarousel from "@/components/home/team-carousel";
+import Faq from "@/components/home/faq";
+import ClosingCta from "@/components/home/closing-cta";
+import AppleFooter from "@/components/home/apple-footer";
 
-import { useState } from "react";
-import Navbar from "@/components/sections/navbar";
-import Hero from "@/components/sections/hero";
-import OverlayMenu from "@/components/sections/overlay-menu";
-import ExperienceIntro from "@/components/sections/experience-intro";
-import WhoWeAre from "@/components/sections/who-we-are";
-import SponsorAnnouncement from "@/components/sections/sponsor-announcement";
-import Sponsors from "@/components/sections/sponsors";
-import EventInterview from "@/components/sections/event-interview";
-import Services from "@/components/sections/services";
-import UpcomingEvents from "@/components/sections/upcoming-events";
-import Partners from "@/components/sections/partners";
-import TeamSection from "@/components/sections/team";
-import FAQSection from "@/components/sections/faq";
-import CtaSection from "@/components/sections/cta";
-import Footer from "@/components/sections/footer";
+// Fallback face for non-Apple devices; Apple devices render SF Pro via the system font stack.
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
-    <>
-      <Navbar onMenuToggle={() => setMenuOpen(true)} />
-      <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
-      <main>
+    <HomeShell className={inter.variable}>
+      <a href="#content" className="ap-skip">
+        Skip to content
+      </a>
+      <AppleNav />
+      <main id="content">
         <Hero />
-        <ExperienceIntro />
-        <WhoWeAre />
-        <SponsorAnnouncement />
-        <Sponsors />
-        <EventInterview />
-        <UpcomingEvents />
-        <Services />
-        <Partners />
-        <TeamSection />
-        <FAQSection />
+        <Manifesto />
+        <Impact />
+        <ServicesBento />
+        <EventsHighlights />
+        <PartnersPress />
+        <TeamCarousel />
+        <Faq />
       </main>
-      <CtaSection />
-      <Footer />
-    </>
+      <ClosingCta />
+      <AppleFooter />
+    </HomeShell>
   );
 }
-

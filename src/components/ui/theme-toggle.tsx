@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function ThemeToggle() {
+export default function ThemeToggle({ iconClassName = "text-white" }: { iconClassName?: string } = {}) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -41,7 +41,7 @@ export default function ThemeToggle() {
             animate={{ rotate: 0, opacity: 1, scale: 1 }}
             exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-white"
+            className={iconClassName}
           >
             <circle cx="12" cy="12" r="4" />
             <path d="M12 2v2" />
@@ -69,7 +69,7 @@ export default function ThemeToggle() {
             animate={{ rotate: 0, opacity: 1, scale: 1 }}
             exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-white"
+            className={iconClassName}
           >
             <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
           </motion.svg>

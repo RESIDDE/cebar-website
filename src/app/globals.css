@@ -5,6 +5,20 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Landing-page (Apple-style) palette — values live in src/components/home/home.css */
+@theme inline {
+  --color-ap-canvas: var(--ap-canvas);
+  --color-ap-alt: var(--ap-alt);
+  --color-ap-ink: var(--ap-ink);
+  --color-ap-ink-2: var(--ap-ink-2);
+  --color-ap-ink-3: var(--ap-ink-3);
+  --color-ap-hairline: var(--ap-hairline);
+  --color-ap-tile: var(--ap-tile);
+  --color-ap-fill: var(--ap-fill);
+  --color-ap-accent: var(--ap-accent);
+  --color-ap-accent-text: var(--ap-accent-text);
+}
+
 @theme {
   --color-background: #ffffff;
   --color-foreground: #0d0d0d;

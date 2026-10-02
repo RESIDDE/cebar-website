@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
-const footerLinks = {
+export const footerLinks = {
   Services: [
     { name: "Educator Training", href: "/services" },
     { name: "HR Solutions", href: "/services" },

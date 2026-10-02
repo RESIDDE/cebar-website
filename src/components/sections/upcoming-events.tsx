@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { Calendar, MapPin, Clock, ArrowUpRight, ChevronRight, Sparkles } from "lucide-react";
 
-interface EventItem {
+export interface EventItem {
   id: string;
   num: string;
   title: string;
@@ -20,7 +20,7 @@ interface EventItem {
   registerUrl: string;
 }
 
-const cebarEvents: EventItem[] = [
+export const cebarEvents: EventItem[] = [
   {
     id: "aec-2026",
     num: "01",

@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { FaLinkedinIn, FaTwitter, FaFacebook } from 'react-icons/fa';
 
-const teamMembers = [
+export const teamMembers = [
   {
     name: "Carol Barlow",
     role: "CEO & Executive Consultant",
