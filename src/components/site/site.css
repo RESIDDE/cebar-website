@@ -1,6 +1,6 @@
 /*
- * Apple-style design system for the landing page.
- * Everything is scoped to `.apple-home` so other routes keep the existing look.
+ * Apple-style design system for the whole site.
+ * Everything is scoped to `.apple-site`, which the root layout applies.
  * Tailwind colour utilities (`bg-ap-alt`, `text-ap-ink-2`, …) map to these
  * variables via the `@theme inline` block in globals.css.
  */
@@ -8,7 +8,7 @@
 /* Re-state Tailwind's layer order so this file slots in correctly whatever the load order. */
 @layer theme, base, components, utilities;
 
-.apple-home {
+.apple-site {
   --ap-canvas: #ffffff;
   --ap-alt: #f5f5f7;
   --ap-ink: #1d1d1f;
@@ -21,6 +21,7 @@
   --ap-accent-hover: #b30009;
   --ap-accent-text: #d1000a;
   --ap-nav: rgba(255, 255, 255, 0.72);
+  --ap-field-border: #d2d2d7;
   --ap-gutter: 22px;
 
   --ap-font: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont,
@@ -36,7 +37,7 @@
   overflow-x: clip;
 }
 
-.dark .apple-home {
+.dark .apple-site {
   --ap-canvas: #000000;
   --ap-alt: #161617;
   --ap-ink: #f5f5f7;
@@ -47,10 +48,11 @@
   --ap-fill: #2c2c2e;
   --ap-accent-text: #ff453a;
   --ap-nav: rgba(22, 22, 23, 0.72);
+  --ap-field-border: #424245;
 }
 
 /* "Pro" tiles stay black in both themes. */
-.apple-home .ap-dark {
+.apple-site .ap-dark {
   --ap-canvas: #000000;
   --ap-alt: #161617;
   --ap-ink: #f5f5f7;
@@ -64,27 +66,33 @@
   color: var(--ap-ink);
 }
 
+/* Adjacent black tiles meeting on a fractional pixel would show a light seam; overlap them. */
+.apple-site .ap-dark + .ap-dark {
+  margin-top: -1px;
+}
+
 /* Nav tone while it floats over a black tile. */
-.apple-home .ap-nav-dark {
+.apple-site .ap-nav-dark {
   --ap-ink: #f5f5f7;
+  --ap-ink-2: #a1a1a6;
   --ap-hairline: rgba(255, 255, 255, 0.14);
   --ap-nav: rgba(22, 22, 23, 0.72);
 }
 
 @layer base {
-  .apple-home :is(h1, h2, h3, h4, h5, h6) {
+  .apple-site :is(h1, h2, h3, h4, h5, h6) {
     font-family: inherit;
     font-weight: 600;
     letter-spacing: inherit;
     text-wrap: balance;
   }
 
-  .apple-home :focus-visible {
+  .apple-site :focus-visible {
     outline: 2px solid var(--ap-accent-text);
     outline-offset: 3px;
   }
 
-  .apple-home ::selection {
+  .apple-site ::selection {
     background: rgba(209, 0, 10, 0.18);
   }
 }
@@ -241,6 +249,21 @@
     cursor: default;
   }
 
+  /* A link whose hit area stretches over its whole (positioned, rounded) card. */
+  .ap-stretched-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+  }
+  .ap-stretched-link:focus-visible {
+    outline: none;
+  }
+  .ap-stretched-link:focus-visible::after {
+    outline: 2px solid var(--ap-accent-text);
+    outline-offset: 3px;
+  }
+
   /* ---------- Materials ---------- */
   .ap-glass {
     background: var(--ap-nav);
@@ -268,6 +291,69 @@
   }
   .ap-no-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  /* ---------- Media frame: image settles from a slight zoom as it scrolls in ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .ap-media-img {
+      transform: scale(var(--media-scale, 1));
+    }
+  }
+
+  /* ---------- Form fields with floating labels ---------- */
+  .ap-field {
+    position: relative;
+  }
+  .ap-input {
+    display: block;
+    width: 100%;
+    height: 56px;
+    padding: 22px 16px 6px;
+    border: 1px solid var(--ap-field-border);
+    border-radius: 12px;
+    background: var(--ap-tile);
+    color: var(--ap-ink);
+    font-size: 17px;
+    letter-spacing: -0.022em;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+  }
+  .ap-input:focus,
+  .ap-input:focus-visible {
+    outline: none;
+    border-color: var(--ap-accent-text);
+    box-shadow: 0 0 0 4px rgba(209, 0, 10, 0.14);
+  }
+  textarea.ap-input {
+    height: auto;
+    min-height: 168px;
+    padding-top: 28px;
+    resize: vertical;
+  }
+  select.ap-input {
+    appearance: none;
+    padding-right: 44px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%2386868b' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+  }
+  .ap-label {
+    position: absolute;
+    left: 17px;
+    top: 17px;
+    color: var(--ap-ink-3);
+    font-size: 17px;
+    line-height: 1.2;
+    pointer-events: none;
+    transform-origin: left top;
+    transition: transform 200ms cubic-bezier(0.28, 0.11, 0.32, 1), color 200ms ease;
+  }
+  .ap-input:focus + .ap-label,
+  .ap-input:not(:placeholder-shown) + .ap-label,
+  .ap-label-floated {
+    transform: translateY(-9px) scale(0.706);
+  }
+  .ap-input:focus + .ap-label {
+    color: var(--ap-accent-text);
   }
 
   /* ---------- Hero media: pinned clip-path expansion on desktop ---------- */
@@ -364,13 +450,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .apple-home .ap-scrub-word {
+  .apple-site .ap-scrub-word {
     opacity: 1 !important;
   }
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .apple-home .ap-glass {
+  .apple-site .ap-glass {
     background: var(--ap-canvas);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;

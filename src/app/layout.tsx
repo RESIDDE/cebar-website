@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import "@/components/site/site.css";
 import VisualEditsMessenger from "../visual-edits/VisualEditsMessenger";
 import ErrorReporter from "@/components/ErrorReporter";
-import Script from "next/script";
 
 import SmoothScroll from "@/components/providers/smooth-scroll";
 import ThemeProvider from "@/components/providers/theme-provider";
+import SiteShell from "@/components/site/site-shell";
+import SiteNav from "@/components/site/site-nav";
+import SiteFooter from "@/components/site/site-footer";
+
+// Fallback face for non-Apple devices; Apple devices render SF Pro via the system font stack.
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
   title: "CEBAR Group — Education & Corporate Training Consultancy",
@@ -21,12 +28,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="antialiased">
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <body className={`antialiased ${inter.variable}`}>
         <ThemeProvider>
           <ErrorReporter />
           <SmoothScroll>
-            {children}
+            <SiteShell>
+              <a href="#content" className="ap-skip">
+                Skip to content
+              </a>
+              <SiteNav />
+              <main id="content">{children}</main>
+              <SiteFooter />
+            </SiteShell>
           </SmoothScroll>
           <VisualEditsMessenger />
         </ThemeProvider>

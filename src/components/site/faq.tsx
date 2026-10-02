@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import Reveal from "./reveal";
 import { snappy } from "./motion";
-import { faqs } from "./data";
+import { faqs } from "@/lib/faq-data";
 
 export default function Faq() {
   const [open, setOpen] = useState<number | null>(0);

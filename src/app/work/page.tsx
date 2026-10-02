@@ -1,10 +1,9 @@
-import React from "react";
 import WorkIndexClient from "./work-index-client";
 import { projectsData } from "@/lib/project-data";
 
 export const metadata = {
-  title: "Our Work | Antigravity Design Studio",
-  description: "Explore our portfolio of award-winning digital experiences, from fintech solutions to healthcare platforms.",
+  title: "Our Work | CEBAR Group",
+  description: "Case studies from CEBAR Group's training, HR and consultancy work across education, corporate and government sectors.",
 };
 
 export default function WorkPage() {

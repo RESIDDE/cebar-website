@@ -2,8 +2,8 @@ import React from "react";
 import ContactClient from "./contact-client";
 
 export const metadata = {
-  title: "Contact Us | Antigravity Design Studio",
-  description: "Let's build something extraordinary. Reach out to discuss your next project or just to say hello.",
+  title: "Contact Us | CEBAR Group",
+  description: "Get in touch with CEBAR Group about training, recruitment, consultancy and events for your school, organisation or department.",
 };
 
 export default function ContactPage() {

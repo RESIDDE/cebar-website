@@ -4,11 +4,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { teamMembers } from "@/components/sections/team";
+import { teamMembers } from "@/lib/team-data";
 import { cdnLoader } from "./image-loader";
 import Reveal from "./reveal";
+import SectionHeader from "./section-header";
 
-export default function TeamCarousel() {
+export default function TeamCarousel({ tone = "canvas" }: { tone?: "canvas" | "alt" }) {
   const railRef = useRef<HTMLUListElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -38,20 +39,24 @@ export default function TeamCarousel() {
   };
 
   return (
-    <section id="team" aria-labelledby="team-title" className="ap-section bg-ap-canvas">
+    <section
+      id="team"
+      aria-labelledby="team-title"
+      className={`ap-section ${tone === "alt" ? "bg-ap-alt" : "bg-ap-canvas"}`}
+    >
       <div className="ap-container-wide">
-        <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-[720px]">
-            <p className="ap-eyebrow mb-3">Leadership</p>
-            <h2 id="team-title" className="ap-h2">
-              The people behind the mission.
-            </h2>
-            <p className="ap-lead mt-5">Educators, HR specialists and consultants united by a single purpose.</p>
-          </div>
-          <Link href="/our-team" className="ap-link shrink-0">
-            Meet the full team
-          </Link>
-        </Reveal>
+        <SectionHeader
+          id="team-title"
+          align="left"
+          eyebrow="Leadership"
+          title="The people behind the mission."
+          lead="Educators, HR specialists and consultants united by a single purpose."
+          action={
+            <Link href="/our-team" className="ap-link">
+              Meet the full team
+            </Link>
+          }
+        />
       </div>
 
       <Reveal delay={0.1}>

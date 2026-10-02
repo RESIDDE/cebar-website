@@ -4,8 +4,8 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { cdnLoader } from "./image-loader";
-import { cssVars, reveal } from "./motion";
+import { cdnLoader } from "@/components/site/image-loader";
+import { cssVars, reveal } from "@/components/site/motion";
 import { HERO_IMAGE } from "./data";
 
 export default function Hero() {

@@ -4,8 +4,8 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Play } from "lucide-react";
-import Reveal from "./reveal";
-import { snappy } from "./motion";
+import Reveal from "@/components/site/reveal";
+import { snappy } from "@/components/site/motion";
 
 const VIDEO_SRC = "/weekly%20politics%20interview%20(3).mp4";
 

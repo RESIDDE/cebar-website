@@ -5,26 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useScroll, useTransform } from "framer-motion";
 import { useLenis } from "lenis/react";
-import { cebarEvents } from "@/components/sections/upcoming-events";
-import { cdnLoader } from "./image-loader";
-import Reveal from "./reveal";
-import { cssVars } from "./motion";
-import { wixOriginal } from "./data";
+import { cebarEvents, eventImage, eventTheme, eventYear } from "@/lib/events-data";
+import { cdnLoader } from "@/components/site/image-loader";
+import Reveal from "@/components/site/reveal";
+import { cssVars } from "@/components/site/motion";
 
 const PINNED_QUERY = "(min-width: 1024px) and (prefers-reduced-motion: no-preference)";
-
-// The 2026 Wix flyer is only 526px wide; the local copy of the same programme is 1950px.
-const imageFor: Record<string, { src: string; position?: string }> = {
-  "aec-2026": { src: "/ait%20interview.jpeg", position: "object-top" },
-};
-
-const SMALL_WORDS = new Set(["in", "of", "for", "and", "the", "a"]);
-const titleCase = (s: string) =>
-  s
-    .toLowerCase()
-    .split(" ")
-    .map((w, i) => (i > 0 && SMALL_WORDS.has(w) ? w : w.charAt(0).toUpperCase() + w.slice(1)))
-    .join(" ");
 
 export default function EventsHighlights() {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -104,8 +90,8 @@ export default function EventsHighlights() {
             style={cssVars({ "--rail-x": railX })}
           >
             {cebarEvents.map((evt, i) => {
-              const year = evt.title.match(/\d{4}/)?.[0] ?? "";
-              const img = imageFor[evt.id] ?? { src: wixOriginal(evt.image) };
+              const year = eventYear(evt);
+              const img = eventImage(evt);
               return (
                 <li
                   key={evt.id}
@@ -119,7 +105,7 @@ export default function EventsHighlights() {
                       alt={`${evt.title}`}
                       fill
                       sizes="(min-width: 1024px) 45vw, 84vw"
-                      className={`object-cover ${img.position ?? "object-center"}`}
+                      className={`object-cover ${img.position}`}
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-7 md:p-10">
@@ -137,7 +123,7 @@ export default function EventsHighlights() {
                     <div className="mt-auto pt-10">
                       <h3 className="ap-h4">
                         <span className="sr-only">{evt.title}: </span>
-                        {titleCase(evt.theme)}
+                        {eventTheme(evt)}
                       </h3>
                       <p className="mt-3 line-clamp-3 max-w-[46ch] text-[15px] leading-[1.47] text-ap-ink-2">
                         {evt.description}

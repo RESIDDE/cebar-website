@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useInView } from "framer-motion";
 import NumberFlow from "@number-flow/react";
-import Reveal from "./reveal";
+import Reveal from "@/components/site/reveal";
 import { impactStats, standards } from "./data";
 
 const COUNT_TIMING = { duration: 1400, easing: "cubic-bezier(0.28, 0.11, 0.32, 1)" };

@@ -1,190 +1,144 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import Navbar from "@/components/sections/navbar";
-import OverlayMenu from "@/components/sections/overlay-menu";
-import Footer from "@/components/sections/footer";
-import { FiArrowUpRight } from "react-icons/fi";
+import { useState, type FormEvent, type InputHTMLAttributes } from "react";
+import PageHero from "@/components/site/page-hero";
+import Reveal from "@/components/site/reveal";
+import Faq from "@/components/site/faq";
+import { serviceAreas } from "@/lib/services-data";
 
-const FadeUp = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
+const EMAIL = "info@cebargroup.co.uk";
+
+const socials = [
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/cebar-learning-hub/" },
+  { name: "Instagram", href: "https://www.instagram.com/cebar_consultancy/" },
+  { name: "Facebook", href: "https://www.facebook.com/share/164onuEitD/" },
+];
+
+const topics = [...serviceAreas.map((a) => a.title), "Events", "Something else"];
+
+type FieldProps = { id: string; label: string } & InputHTMLAttributes<HTMLInputElement>;
+
+function Field({ id, label, type = "text", ...rest }: FieldProps) {
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay }}
-    >
-      {children}
-    </motion.div>
+    <div className="ap-field">
+      <input id={id} name={id} type={type} placeholder=" " className="ap-input peer" {...rest} />
+      <label htmlFor={id} className="ap-label">
+        {label}
+      </label>
+    </div>
   );
-};
+}
 
 export default function ContactClient() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // There's no mail backend, so hand the message to the visitor's email app, ready to send.
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+    const data = new FormData(e.currentTarget);
+    const get = (k: string) => String(data.get(k) ?? "").trim();
+    const subject = `Enquiry: ${get("topic")}${get("organisation") ? ` — ${get("organisation")}` : ""}`;
+    const signature = [get("name"), get("organisation"), get("email")].filter(Boolean).join("\n");
+    const body = `${get("message")}\n\n—\n${signature}`;
+    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setSent(true);
   };
 
   return (
-    <main className="min-h-screen selection:bg-[#D1000A] selection:text-white">
-      <Navbar onMenuToggle={() => setMenuOpen(true)} />
-      <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+    <>
+      <PageHero
+        eyebrow="Contact"
+        title="Get in touch."
+        lead="Tell us about your school, organisation or department, and we’ll get back to you."
+      />
 
-      {/* --- HERO SECTION --- */}
-      <section className="pt-[25vh] pb-[10vh] px-[5vw]">
-        <div className="max-w-[1600px] mx-auto">
-          <FadeUp>
-            <h1 className="text-[clamp(4rem,15vw,13rem)] leading-[0.8] font-medium uppercase tracking-tighter mb-12 italic">
-              Get in <br /> <span className="text-[#D1000A] not-italic">Touch.</span>
-            </h1>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* --- MAIN CONTENT --- */}
-      <section className="px-[5vw] pb-[20vh]">
-        <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-24 lg:gap-8">
-
-          {/* Contact Info */}
-          <div className="lg:col-span-4 space-y-16">
-            <FadeUp delay={0.1}>
-              <div className="space-y-10">
-                <div>
-                  <p className="text-[10px] uppercase font-black tracking-[0.4em] text-white/30 mb-3">Email Us</p>
-                  <a href="mailto:info@cebargroup.co.uk" className="text-xl md:text-2xl font-light underline decoration-[#D1000A]/30 underline-offset-8 hover:decoration-[#D1000A] transition-all">
-                    info@cebargroup.co.uk
-                  </a>
-                </div>
-                <div>
-                  <p className="text-[10px] uppercase font-black tracking-[0.4em] text-white/30 mb-3">Phone</p>
-                  <a href="tel:+447000000000" className="text-xl md:text-2xl font-light underline decoration-[#D1000A]/30 underline-offset-8 hover:decoration-[#D1000A] transition-all">
-                    +44 (0) 700 000 0000
-                  </a>
-                </div>
-              </div>
-            </FadeUp>
-
-            <FadeUp delay={0.2}>
-              <div className="pt-8 border-t border-white/10">
-                <p className="text-[10px] uppercase font-black tracking-[0.4em] text-white/30 mb-8">Follow Us</p>
-                <div className="flex flex-wrap gap-4">
-                  {[
-                    { name: "LinkedIn", href: "https://www.linkedin.com/company/cebar-learning-hub/" },
-                    { name: "Instagram", href: "https://www.instagram.com/cebar_consultancy/" },
-                    { name: "Facebook", href: "https://www.facebook.com/share/164onuEitD/" },
-                  ].map(s => (
-                    <a
-                      key={s.name}
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-bold tracking-widest uppercase border border-white/10 px-5 py-2.5 rounded-full hover:border-[#D1000A] hover:text-[#D1000A] transition-all duration-300"
-                    >
+      <section aria-label="Contact details and form" className="bg-ap-canvas pb-[clamp(88px,12vw,160px)]">
+        <div className="ap-container-wide grid gap-5 lg:grid-cols-12">
+          <div className="grid gap-5 sm:grid-cols-2 lg:col-span-5 lg:grid-cols-1 lg:content-start">
+            <Reveal className="rounded-[28px] bg-ap-alt p-8 md:p-10">
+              <h2 className="text-[14px] text-ap-ink-3">Email us</h2>
+              <a
+                href={`mailto:${EMAIL}`}
+                className="mt-2 block break-words text-[clamp(1.3125rem,2vw,1.75rem)] font-semibold leading-[1.15] text-ap-ink hover:text-ap-accent-text"
+              >
+                {EMAIL}
+              </a>
+              <p className="mt-3 text-ap-ink-2">For training, recruitment, partnerships and events.</p>
+            </Reveal>
+            <Reveal delay={0.05} className="rounded-[28px] bg-ap-alt p-8 md:p-10">
+              <h2 className="text-[14px] text-ap-ink-3">Our office</h2>
+              <p className="mt-2 text-[clamp(1.3125rem,2vw,1.75rem)] font-semibold leading-[1.15]">
+                London, United Kingdom
+              </p>
+              <p className="mt-4 inline-flex items-center gap-2 text-[15px] text-ap-ink-2">
+                <span aria-hidden className="h-2 w-2 rounded-full bg-[#30d158]" />
+                Open for partnerships
+              </p>
+            </Reveal>
+            <Reveal delay={0.1} className="rounded-[28px] bg-ap-alt p-8 sm:col-span-2 md:p-10 lg:col-span-1">
+              <h2 className="text-[14px] text-ap-ink-3">Follow us</h2>
+              <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+                {socials.map((s) => (
+                  <li key={s.name}>
+                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="ap-link">
                       {s.name}
+                      <span className="sr-only"> (opens in a new tab)</span>
                     </a>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.1} className="rounded-[28px] bg-ap-alt p-8 md:p-12 lg:col-span-7">
+            <h2 id="form-title" className="ap-h3">
+              Send us a message
+            </h2>
+            <form aria-labelledby="form-title" onSubmit={onSubmit} className="mt-8 grid gap-3">
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Field id="name" label="Your name" autoComplete="name" required />
+                <Field id="organisation" label="Organisation or school" autoComplete="organization" />
+              </div>
+              <Field id="email" label="Email address" type="email" autoComplete="email" required />
+              <div className="ap-field">
+                <select id="topic" name="topic" className="ap-input" defaultValue={topics[0]}>
+                  {topics.map((t) => (
+                    <option key={t}>{t}</option>
                   ))}
-                </div>
+                </select>
+                <label htmlFor="topic" className="ap-label ap-label-floated">
+                  I’m interested in
+                </label>
               </div>
-            </FadeUp>
-
-            <FadeUp delay={0.3}>
-              <div className="p-8 bg-white/5 rounded-[2rem] border border-white/10 backdrop-blur-md">
-                <p className="text-[10px] uppercase font-black tracking-[0.4em] text-white/30 mb-4">Our Office</p>
-                <h4 className="text-lg leading-relaxed mb-4">
-                  London, United Kingdom
-                </h4>
-                <div className="flex items-center gap-2 text-[#D1000A] text-sm font-bold uppercase tracking-widest">
-                  <span className="w-2 h-2 rounded-full bg-[#D1000A] animate-pulse"></span>
-                  Open for partnerships
-                </div>
+              <div className="ap-field">
+                <textarea id="message" name="message" placeholder=" " rows={6} required className="ap-input peer" />
+                <label htmlFor="message" className="ap-label">
+                  How can we help?
+                </label>
               </div>
-            </FadeUp>
-          </div>
-
-          {/* Contact Form */}
-          <div className="lg:col-span-7 lg:col-start-6">
-            <FadeUp delay={0.2}>
-              <form onSubmit={handleSubmit} className="space-y-12">
-                <div className="relative group">
-                  <input
-                    type="text"
-                    required
-                    placeholder=" "
-                    id="contact-name"
-                    className="w-full bg-transparent border-b-2 border-white/10 py-6 text-2xl md:text-4xl font-light focus:outline-none focus:border-[#D1000A] transition-colors peer"
-                  />
-                  <label htmlFor="contact-name" className="absolute top-6 left-0 text-2xl md:text-4xl font-light text-white/20 pointer-events-none transition-all duration-500 peer-focus:-top-6 peer-focus:text-xs peer-focus:font-black peer-focus:tracking-[0.4em] peer-focus:uppercase peer-focus:text-[#D1000A] peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-black peer-[:not(:placeholder-shown)]:tracking-[0.4em] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:text-[#D1000A]">
-                    Your Name
-                  </label>
-                </div>
-
-                <div className="relative group">
-                  <input
-                    type="text"
-                    required
-                    placeholder=" "
-                    id="contact-org"
-                    className="w-full bg-transparent border-b-2 border-white/10 py-6 text-2xl md:text-4xl font-light focus:outline-none focus:border-[#D1000A] transition-colors peer"
-                  />
-                  <label htmlFor="contact-org" className="absolute top-6 left-0 text-2xl md:text-4xl font-light text-white/20 pointer-events-none transition-all duration-500 peer-focus:-top-6 peer-focus:text-xs peer-focus:font-black peer-focus:tracking-[0.4em] peer-focus:uppercase peer-focus:text-[#D1000A] peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-black peer-[:not(:placeholder-shown)]:tracking-[0.4em] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:text-[#D1000A]">
-                    Organisation / School
-                  </label>
-                </div>
-
-                <div className="relative group">
-                  <input
-                    type="email"
-                    required
-                    placeholder=" "
-                    id="contact-email"
-                    className="w-full bg-transparent border-b-2 border-white/10 py-6 text-2xl md:text-4xl font-light focus:outline-none focus:border-[#D1000A] transition-colors peer"
-                  />
-                  <label htmlFor="contact-email" className="absolute top-6 left-0 text-2xl md:text-4xl font-light text-white/20 pointer-events-none transition-all duration-500 peer-focus:-top-6 peer-focus:text-xs peer-focus:font-black peer-focus:tracking-[0.4em] peer-focus:uppercase peer-focus:text-[#D1000A] peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-black peer-[:not(:placeholder-shown)]:tracking-[0.4em] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:text-[#D1000A]">
-                    Email Address
-                  </label>
-                </div>
-
-                <div className="relative group">
-                  <textarea
-                    required
-                    placeholder=" "
-                    id="contact-message"
-                    rows={4}
-                    className="w-full bg-transparent border-b-2 border-white/10 py-6 text-2xl md:text-4xl font-light focus:outline-none focus:border-[#D1000A] transition-colors peer resize-none"
-                  />
-                  <label htmlFor="contact-message" className="absolute top-6 left-0 text-2xl md:text-4xl font-light text-white/20 pointer-events-none transition-all duration-500 peer-focus:-top-6 peer-focus:text-xs peer-focus:font-black peer-focus:tracking-[0.4em] peer-focus:uppercase peer-focus:text-[#D1000A] peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-black peer-[:not(:placeholder-shown)]:tracking-[0.4em] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:text-[#D1000A]">
-                    How can we help?
-                  </label>
-                </div>
-
-                <div className="pt-4">
-                  <button
-                    type="submit"
-                    className="group relative flex items-center justify-between w-full md:w-auto md:min-w-[280px] border-2 border-white/20 rounded-full px-10 py-6 transition-all hover:border-[#D1000A] overflow-hidden"
-                  >
-                    <span className="relative z-10 text-xs font-black tracking-[0.3em] uppercase transition-colors group-hover:text-white">
-                      {isSubmitted ? "Message Sent!" : "Send Message"}
-                    </span>
-                    <div className="relative z-10 w-7 h-7 rounded-full border border-white/20 flex items-center justify-center transition-all group-hover:rotate-45">
-                      <FiArrowUpRight size={16} className="text-[#D1000A]" />
-                    </div>
-                    <div className="absolute inset-0 bg-[#D1000A] scale-x-0 origin-right transition-transform duration-700 group-hover:scale-x-100" />
-                  </button>
-                </div>
-              </form>
-            </FadeUp>
-          </div>
+              <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center">
+                <button type="submit" className="ap-pill w-full sm:w-auto">
+                  Send message
+                </button>
+                <p className="text-[14px] text-ap-ink-3">Opens your email app with your message ready to send.</p>
+              </div>
+              <p role="status" className="min-h-[1.5em] text-[15px] text-ap-ink-2">
+                {sent && (
+                  <>
+                    Your email app should now be open with the message filled in. If nothing happened, email us at{" "}
+                    <a href={`mailto:${EMAIL}`} className="text-ap-accent-text underline">
+                      {EMAIL}
+                    </a>
+                    .
+                  </>
+                )}
+              </p>
+            </form>
+          </Reveal>
         </div>
       </section>
 
-      <Footer />
-    </main>
+      <Faq />
+    </>
   );
 }

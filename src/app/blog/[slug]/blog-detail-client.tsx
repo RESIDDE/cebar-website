@@ -1,219 +1,130 @@
 "use client";
 
-import React from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
-import { ArrowLeft, Clock, Calendar, Tag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import Navbar from "@/components/sections/navbar";
-import OverlayMenu from "@/components/sections/overlay-menu";
-import Footer from "@/components/sections/footer";
-import { BlogPost } from "@/lib/blog-data";
+import { motion, useScroll } from "framer-motion";
+import { enter } from "@/components/site/page-hero";
+import Reveal from "@/components/site/reveal";
+import PostCard from "@/components/site/post-card";
+import AuthorAvatar from "@/components/site/author-avatar";
+import { blogPosts, type BlogPost } from "@/lib/blog-data";
 
-function ScrollProgress() {
+function ReadingProgress() {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-[3px] bg-[#D1000A] z-[500] origin-left"
-      style={{ scaleX }}
+      aria-hidden
+      className="fixed inset-x-0 top-12 z-40 h-[2px] origin-left bg-ap-accent-text"
+      style={{ scaleX: scrollYProgress }}
     />
   );
 }
 
 export default function BlogDetailClient({ post }: { post: BlogPost }) {
-  const [menuOpen, setMenuOpen] = React.useState(false);
-  const router = useRouter();
+  const related = blogPosts.filter((p) => p.id !== post.id).slice(0, 3);
 
   return (
-    <main className="min-h-screen bg-white text-[#111] selection:bg-[#D1000A] selection:text-white">
-      <ScrollProgress />
-      <Navbar onMenuToggle={() => setMenuOpen(true)} />
-      <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+    <>
+      <ReadingProgress />
 
-      {/* Back nav bar */}
-      <div className="pt-28 pb-8 px-[5vw]">
-        <div className="max-w-[1200px] mx-auto">
-          <motion.button
-            onClick={() => router.back()}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="group inline-flex items-center gap-3 text-[11px] font-black tracking-[0.3em] uppercase text-[#111]/40 hover:text-[#D1000A] transition-colors duration-300"
-          >
-            <span className="w-8 h-8 rounded-full border border-[#111]/10 flex items-center justify-center group-hover:bg-[#D1000A] group-hover:border-[#D1000A] transition-all duration-300">
-              <ArrowLeft className="w-3.5 h-3.5 group-hover:text-white transition-colors duration-300" />
-            </span>
-            Back to Insights
-          </motion.button>
-        </div>
-      </div>
-
-      {/* Article Header */}
-      <header className="px-[5vw] pb-16">
-        <div className="max-w-[1200px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="inline-block text-[11px] font-black tracking-[0.3em] uppercase text-amber-600 mb-6 bg-amber-600/8 px-4 py-1.5 rounded-full border border-amber-600/15">
-              {post.category}
-            </span>
-            <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-medium uppercase tracking-tighter leading-[0.95] mb-10 max-w-5xl">
+      <article aria-labelledby="page-title">
+        <header className="ap-container pt-[clamp(40px,6vw,72px)]">
+          <div className="mx-auto max-w-[692px]">
+            <motion.div {...enter(0)}>
+              <Link href="/blog" className="ap-caption inline-flex items-center gap-1 text-ap-ink-2 hover:text-ap-ink">
+                <span aria-hidden>‹</span> All insights
+              </Link>
+            </motion.div>
+            <motion.p {...enter(1)} className="ap-caption mt-8 font-semibold uppercase tracking-[0.06em] text-ap-accent-text">
+              {post.category} · {post.date}
+            </motion.p>
+            <motion.h1
+              {...enter(2)}
+              id="page-title"
+              className="mt-3 text-[clamp(2.25rem,4.5vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.012em]"
+            >
               {post.title}
-            </h1>
-            <div className="flex flex-wrap items-center gap-6 text-sm text-[#111]/50 font-light">
-              <span className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-[#D1000A]" />
-                Published {post.date}
-              </span>
-              <span className="text-[#111]/20">•</span>
-              <span className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-[#D1000A]" />
-                {post.readTime}
-              </span>
-            </div>
-          </motion.div>
-        </div>
-      </header>
-
-      {/* Hero Image */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        className="px-[5vw] pb-20"
-      >
-        <div className="max-w-[1200px] mx-auto">
-          <div className="aspect-[21/9] w-full rounded-[2.5rem] overflow-hidden relative shadow-2xl">
-            <Image
-              src={post.heroImage}
-              alt={post.title}
-              fill
-              className="object-cover"
-              priority
-              sizes="90vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Article Body */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="px-[5vw] pb-32"
-      >
-        <div className="max-w-[1200px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-
-            {/* Author Sidebar */}
-            <aside className="lg:col-span-4">
-              <div className="lg:sticky lg:top-28 space-y-8">
-                <div>
-                  <span className="text-[9px] font-black tracking-[0.4em] uppercase text-[#111]/30 mb-5 block">
-                    Author Profile
-                  </span>
-                  <div className="flex lg:flex-col items-center lg:items-start gap-4 p-6 rounded-[2rem] border border-[#111]/10 bg-white/30 backdrop-blur-sm">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-md flex-shrink-0">
-                      <Image
-                        src={post.authorImage}
-                        alt={post.author}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div>
-                      <div className="text-base font-bold uppercase tracking-wider text-[#111]">
-                        {post.author}
-                      </div>
-                      <div className="text-xs text-[#111]/50 font-light mt-1">
-                        {post.authorRole}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <span className="text-[9px] font-black tracking-[0.4em] uppercase text-[#111]/30 mb-4 block">
-                    Focus Areas
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[10px] font-bold uppercase tracking-widest text-[#111]/50 bg-white/40 border border-[#111]/8 px-3 py-1 rounded-full flex items-center gap-1.5"
-                      >
-                        <Tag className="w-2.5 h-2.5 text-[#D1000A]" />
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Back to blog link */}
-                <Link
-                  href="/blog"
-                  className="group inline-flex items-center gap-2 text-[10px] font-black tracking-[0.3em] uppercase text-[#111]/30 hover:text-[#D1000A] transition-colors duration-300 mt-4"
-                >
-                  <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform duration-300" />
-                  All Insights
-                </Link>
+            </motion.h1>
+            <motion.p {...enter(3)} className="ap-lead mt-6">
+              {post.summary}
+            </motion.p>
+            <motion.div {...enter(4)} className="mt-8 flex items-center gap-3">
+              <AuthorAvatar author={post.author} size={44} />
+              <div className="text-[14px] leading-[1.35]">
+                <p className="font-semibold text-ap-ink">{post.author}</p>
+                <p className="text-ap-ink-3">
+                  {post.authorRole} · {post.readTime}
+                </p>
               </div>
-            </aside>
+            </motion.div>
+          </div>
+        </header>
 
-            {/* Article Content */}
-            <article className="lg:col-span-8">
-              {post.content.map((sec, i) => (
-                <div key={i} className="mb-12">
-                  {sec.sectionTitle && (
-                    <h2 className="text-2xl md:text-3xl font-medium uppercase tracking-tight text-[#111] mt-16 mb-8 pb-4 border-b border-[#111]/8">
-                      {sec.sectionTitle}
-                    </h2>
-                  )}
-                  {sec.text && (
-                    <p className="text-lg md:text-xl font-light text-[#111]/80 leading-[1.85] tracking-wide mb-8 whitespace-pre-line">
-                      {sec.text}
-                    </p>
-                  )}
-                  {sec.quote && (
-                    <blockquote className="my-16 pl-8 border-l-4 border-[#D1000A] italic font-serif text-2xl md:text-3xl text-amber-600 leading-relaxed relative">
-                      <span className="text-[6rem] text-[#D1000A]/5 absolute -top-8 -left-4 pointer-events-none select-none font-serif leading-none">
-                        "
-                      </span>
-                      "{sec.quote}"
-                      {sec.quoteAuthor && (
-                        <cite className="block not-italic text-[10px] font-sans font-black tracking-[0.3em] uppercase text-[#111]/40 mt-6">
-                          — {sec.quoteAuthor}
-                        </cite>
-                      )}
+        {/* Most article photos are ~600px wide, so they sit at the reading-column width rather than full bleed. */}
+        <motion.div {...enter(5)} className="ap-container mt-12 md:mt-16">
+          <div className="relative mx-auto aspect-[4/3] max-w-[692px] overflow-hidden rounded-[28px] bg-ap-alt">
+            <Image src={post.heroImage} alt="" fill priority sizes="(min-width: 736px) 692px, 100vw" className="object-cover" />
+          </div>
+        </motion.div>
+
+        <div className="ap-container pb-[clamp(72px,10vw,128px)] pt-[clamp(48px,7vw,88px)]">
+          <div className="mx-auto max-w-[692px] text-[19px] leading-[1.58] tracking-[-0.012em] text-ap-ink">
+            {post.content.map((sec, i) => (
+              <div key={i}>
+                {sec.sectionTitle && <h2 className="ap-h3 mb-6 mt-14">{sec.sectionTitle}</h2>}
+                {sec.text && <p className="mb-7 whitespace-pre-line">{sec.text}</p>}
+                {sec.quote && (
+                  <figure className="my-14 border-l-[3px] border-ap-accent pl-6 md:-ml-8 md:pl-8">
+                    <blockquote className="text-[clamp(1.5rem,2.6vw,2rem)] font-semibold leading-[1.25] tracking-[-0.01em]">
+                      “{sec.quote}”
                     </blockquote>
-                  )}
-                </div>
+                    {sec.quoteAuthor && (
+                      <figcaption className="mt-4 text-[15px] text-ap-ink-3">{sec.quoteAuthor}</figcaption>
+                    )}
+                  </figure>
+                )}
+              </div>
+            ))}
+
+            <ul aria-label="Topics" className="mt-14 flex flex-wrap gap-2 border-t border-ap-hairline pt-8">
+              {post.tags.map((tag) => (
+                <li key={tag} className="rounded-full bg-ap-alt px-3.5 py-1.5 text-[14px] text-ap-ink-2">
+                  {tag}
+                </li>
               ))}
-            </article>
+            </ul>
+
+            <div className="mt-10 flex items-center gap-4 rounded-[28px] bg-ap-alt p-6">
+              <AuthorAvatar author={post.author} size={56} />
+              <div className="text-[15px] leading-[1.4]">
+                <p className="text-ap-ink-3">Written by</p>
+                <p className="font-semibold">{post.author}</p>
+                <p className="text-ap-ink-2">{post.authorRole}</p>
+              </div>
+            </div>
           </div>
         </div>
-      </motion.div>
+      </article>
 
-      {/* Bottom CTA banner */}
-      <Link
-        href="/blog"
-        className="block w-full py-16 md:py-24 text-center border-t border-[#111]/10 bg-[#111] hover:bg-[#D1000A] transition-all duration-700 group"
-      >
-        <div className="max-w-[1200px] mx-auto px-[5vw] flex items-center justify-center gap-6">
-          <ArrowLeft className="w-8 h-8 md:w-12 md:h-12 text-white/50 group-hover:text-white group-hover:-translate-x-4 transition-all duration-700" />
-          <span className="text-[clamp(1.5rem,4vw,3.5rem)] font-medium uppercase tracking-tighter leading-none text-white group-hover:italic transition-all duration-700">
-            Back to All Insights
-          </span>
+      <section aria-labelledby="related-title" className="ap-section bg-ap-alt">
+        <div className="ap-container-wide">
+          <div className="flex items-end justify-between gap-6">
+            <h2 id="related-title" className="ap-h2">
+              More insights.
+            </h2>
+            <Link href="/blog" className="ap-link shrink-0">
+              All insights
+            </Link>
+          </div>
+          <ul className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 lg:grid-cols-3">
+            {related.map((p, i) => (
+              <Reveal as="li" key={p.id} delay={0.05 * i}>
+                <PostCard post={p} />
+              </Reveal>
+            ))}
+          </ul>
         </div>
-      </Link>
-
-      <Footer />
-    </main>
+      </section>
+    </>
   );
 }

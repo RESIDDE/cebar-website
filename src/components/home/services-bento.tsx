@@ -6,10 +6,11 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLenis } from "lenis/react";
 import { Plus, X } from "lucide-react";
-import { cdnLoader } from "./image-loader";
-import Reveal from "./reveal";
-import { snappy } from "./motion";
-import { CLASSROOM_IMAGE, serviceAreas, type ServiceArea } from "./data";
+import { cdnLoader } from "@/components/site/image-loader";
+import Reveal from "@/components/site/reveal";
+import { snappy } from "@/components/site/motion";
+import { serviceAreas, type ServiceArea } from "@/lib/services-data";
+import { CLASSROOM_IMAGE } from "./data";
 
 const RADIUS = { borderRadius: 28 };
 
@@ -161,7 +162,7 @@ function ServiceDialog({ area, onClose }: { area: ServiceArea; onClose: () => vo
                 <Link href="/contact" className="ap-pill">
                   Book a consultation
                 </Link>
-                <Link href="/services" className="ap-link">
+                <Link href={`/services#${area.slug}`} className="ap-link">
                   Full service details
                 </Link>
               </div>

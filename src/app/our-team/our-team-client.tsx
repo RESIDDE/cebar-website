@@ -1,72 +1,73 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
-import Navbar from "@/components/sections/navbar";
-import Footer from "@/components/sections/footer";
-import Team from "@/components/sections/team";
-import OverlayMenu from "@/components/sections/overlay-menu";
+import Image from "next/image";
+import PageHero from "@/components/site/page-hero";
+import MediaFrame from "@/components/site/media-frame";
+import Reveal from "@/components/site/reveal";
+import ClosingCta from "@/components/site/closing-cta";
+import { cdnLoader } from "@/components/site/image-loader";
+import { teamMembers } from "@/lib/team-data";
 
-const SplitText = ({ text, className = "" }: { text: string; className?: string }) => (
-  <div className={`flex flex-wrap ${className}`}>
-    {text.split(" ").map((word, i) => (
-      <div key={i} className="overflow-hidden mr-[0.2em] py-[0.05em]">
-        <motion.span
-          initial={{ y: "105%" }}
-          whileInView={{ y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: i * 0.06 }}
-          className="inline-block"
-        >
-          {word}
-        </motion.span>
-      </div>
-    ))}
-  </div>
-);
+const TEAM_PHOTO = "https://static.wixstatic.com/media/343e49_a76105e3cb5548cb8521c889cd711599~mv2.jpeg";
 
 export default function OurTeamClient() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
-    <main className="selection:bg-[#D1000A] selection:text-white">
-      <Navbar onMenuToggle={() => setMenuOpen(true)} />
-      <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+    <>
+      <PageHero
+        eyebrow="Our team"
+        title="The people behind the mission."
+        lead="A dedicated team of educators, HR specialists and consultants united by a single purpose: transforming education and empowering organisations."
+      />
 
-      {/* HERO */}
-      <section className="min-h-[50vh] flex items-end px-[5vw] pt-40 pb-0 bg-background text-foreground relative z-10">
-        <div className="max-w-[1600px] w-full">
-          <motion.span
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-[10px] font-black tracking-[0.5em] uppercase text-[#D1000A] mb-10 block"
-          >
-            The Experts
-          </motion.span>
-          <h1 className="text-[clamp(4.5rem,13vw,13rem)] leading-[0.87] font-medium uppercase tracking-tighter mb-16">
-            <SplitText text="Meet Our" />
-            <SplitText text="Leadership" className="text-white italic" />
-          </h1>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="max-w-2xl ml-auto"
-          >
-            <p className="text-xl md:text-2xl text-white/60 font-light leading-relaxed">
-              We are a dedicated team of educators, HR specialists, and consultants united by a single purpose — transforming education and empowering organisations.
+      <section aria-label="Leadership team" className="bg-ap-canvas pb-[clamp(88px,12vw,160px)]">
+        <ul className="ap-container-wide grid gap-x-5 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          {teamMembers.map((m, i) => (
+            <Reveal as="li" key={m.name} delay={0.05 * (i % 3)} className="group">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-ap-alt">
+                <Image
+                  loader={cdnLoader}
+                  src={m.image}
+                  alt={m.name}
+                  fill
+                  priority={i < 3}
+                  sizes="(min-width: 1024px) 410px, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover object-top transition-transform duration-[1.2s] ease-[cubic-bezier(0.28,0.11,0.32,1)] group-hover:scale-[1.03]"
+                />
+              </div>
+              <h2 className="ap-h4 mt-6">{m.name}</h2>
+              <p className="mt-1 text-[15px] font-semibold text-ap-accent-text">{m.role}</p>
+              <p className="mt-3 max-w-[40ch] text-ap-ink-2">{m.bio}</p>
+            </Reveal>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="together-title" className="ap-section bg-ap-alt">
+        <div className="ap-container-wide">
+          <Reveal className="mx-auto max-w-[860px] text-center">
+            <h2 id="together-title" className="ap-h2">
+              Experience from the classroom, the boardroom and public service.
+            </h2>
+            <p className="ap-lead mx-auto mt-5 max-w-[640px]">
+              Our trainers and consultants are experts in their fields, bringing practical knowledge to every session.
             </p>
-          </motion.div>
+          </Reveal>
+          <Reveal delay={0.1} className="mt-14 md:mt-20">
+            <MediaFrame
+              src={TEAM_PHOTO}
+              alt="The CEBAR Group team"
+              className="aspect-[4/3] md:aspect-[21/9]"
+              position="object-[50%_25%]"
+            />
+          </Reveal>
         </div>
       </section>
 
-      {/* TEAM */}
-      <div className="-mt-16">
-        <Team />
-      </div>
-
-      <Footer />
-    </main>
+      <ClosingCta
+        eyebrow="Work with us"
+        title="Let’s build something lasting together."
+        lead="Talk to our team about training, recruitment or consultancy for your organisation."
+      />
+    </>
   );
 }

@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function ThemeToggle({ iconClassName = "text-white" }: { iconClassName?: string } = {}) {
+export default function ThemeToggle({ iconClassName = "text-current" }: { iconClassName?: string } = {}) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
